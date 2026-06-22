@@ -1,0 +1,341 @@
+// Prisma Schema for Booking SaaS
+// Database: Neon PostgreSQL (Serverless)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// AUTH & USER MANAGEMENT
+// ============================================
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?   // For credentials auth
+
+  // Relations
+  accounts      Account[]
+  sessions      Session[]
+  eventTypes    EventType[]
+  bookings      Booking[]
+  designSettings DesignSettings?
+  googleIntegration GoogleIntegration?
+  trackingSettings TrackingSettings?
+  apiKeys       ApiKey[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ============================================
+// EVENT TYPES (Calendly Event Types)
+// ============================================
+
+model EventType {
+  id          String  @id @default(cuid())
+  userId      String
+  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Basic Info
+  title       String
+  slug        String  @unique
+  description String? @db.Text
+
+  // Scheduling
+  duration    Int     // in minutes
+  bufferTime  Int     @default(0) // buffer before/after in minutes
+
+  // Availability
+  availabilityType String @default("inherit") // "inherit" | "custom"
+  availability     Json?  // Custom availability rules
+
+  // Pricing
+  price       Decimal? @db.Decimal(10, 2)
+  currency    String   @default("EUR")
+
+  // Custom Fields/Questions
+  customFields Json?   // Array of custom question objects
+
+  // Settings
+  requiresConfirmation Boolean @default(false)
+  redirectUrl String?
+  active      Boolean @default(true)
+
+  // Relations
+  bookings    Booking[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([slug])
+}
+
+// ============================================
+// BOOKINGS
+// ============================================
+
+model Booking {
+  id          String   @id @default(cuid())
+
+  // Relations
+  eventTypeId String
+  eventType   EventType @relation(fields: [eventTypeId], references: [id], onDelete: Cascade)
+
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Guest Info
+  guestName   String
+  guestEmail  String
+  guestPhone  String?
+
+  // Booking Details
+  startTime   DateTime
+  endTime     DateTime
+  timezone    String   @default("Europe/Berlin")
+
+  // Status
+  status      BookingStatus @default(PENDING)
+
+  // Custom Fields Responses
+  customFieldsData Json?
+
+  // Google Calendar
+  googleEventId String?
+  googleMeetLink String?
+
+  // Tracking
+  trackingData TrackingData?
+
+  // Metadata
+  notes       String?  @db.Text
+  cancelReason String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([eventTypeId])
+  @@index([startTime])
+  @@index([status])
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+  NO_SHOW
+}
+
+// ============================================
+// GOOGLE INTEGRATIONS
+// ============================================
+
+model GoogleIntegration {
+  id            String  @id @default(cuid())
+  userId        String  @unique
+  user          User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // OAuth2 Tokens
+  accessToken   String  @db.Text
+  refreshToken  String  @db.Text
+  expiresAt     DateTime
+  scope         String
+
+  // Calendar Settings
+  calendarId    String  @default("primary")
+
+  // Status
+  active        Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+// ============================================
+// TRACKING & ANALYTICS
+// ============================================
+
+model TrackingSettings {
+  id            String  @id @default(cuid())
+  userId        String  @unique
+  user          User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Google Ads
+  googleAdsEnabled       Boolean @default(false)
+  googleAdsAccountId     String?
+  googleAdsConversionId  String?
+  googleAdsConversionLabel String?
+
+  // Enhanced Conversions
+  enhancedConversionsEnabled Boolean @default(false)
+
+  // Tracking Mode
+  trackingMode  TrackingMode @default(CONTINUOUS)
+
+  // Last Batch Sync (for BATCH mode)
+  lastBatchSync DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+enum TrackingMode {
+  CONTINUOUS  // Send conversion immediately
+  BATCH       // Send once per night
+}
+
+model TrackingData {
+  id         String  @id @default(cuid())
+  bookingId  String  @unique
+  booking    Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  // URL Parameters
+  gclid      String?
+  gbraid     String?
+  wbraid     String?
+
+  // UTM Parameters
+  utmSource   String?
+  utmMedium   String?
+  utmCampaign String?
+  utmTerm     String?
+  utmContent  String?
+
+  // Conversion Status
+  conversionSent Boolean @default(false)
+  conversionSentAt DateTime?
+  conversionResponse Json? // Google Ads API response
+
+  // Session Data
+  userAgent  String?
+  ipAddress  String?
+  referrer   String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([bookingId])
+  @@index([gclid])
+  @@index([conversionSent])
+}
+
+// ============================================
+// DESIGN CUSTOMIZER
+// ============================================
+
+model DesignSettings {
+  id       String  @id @default(cuid())
+  userId   String  @unique
+  user     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Colors
+  primaryColor      String @default("#3b82f6")
+  backgroundColor   String @default("#ffffff")
+  textColor         String @default("#1f2937")
+  borderColor       String @default("#e5e7eb")
+
+  // Typography
+  fontFamily        String @default("Inter")
+  headingFontSize   String @default("24px")
+  bodyFontSize      String @default("16px")
+  buttonFontSize    String @default("16px")
+
+  // Layout
+  widgetWidth       String @default("800px")
+  widgetHeight      String @default("auto")
+  layoutVariant     String @default("calendar-left") // "calendar-left" | "calendar-right" | "compact" | "slots-only"
+
+  // Branding
+  logoUrl           String?
+  showBranding      Boolean @default(true)
+
+  // Custom CSS
+  customCss         String? @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+// ============================================
+// API KEYS (for WordPress Plugin & Integrations)
+// ============================================
+
+model ApiKey {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  name      String
+  key       String   @unique
+
+  // Permissions
+  scopes    Json     // ["read:bookings", "write:bookings", "read:events"]
+
+  // Usage
+  lastUsedAt DateTime?
+  active    Boolean  @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([key])
+}
