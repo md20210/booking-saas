@@ -31,6 +31,7 @@ model User {
   googleIntegration GoogleIntegration?
   trackingSettings TrackingSettings?
   apiKeys       ApiKey[]
+  apiCredentials ApiCredentials?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -338,4 +339,42 @@ model ApiKey {
 
   @@index([userId])
   @@index([key])
+}
+
+// ============================================
+// API CREDENTIALS (Per-User Configuration)
+// ============================================
+
+model ApiCredentials {
+  id        String  @id @default(cuid())
+  userId    String  @unique
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Google OAuth & Calendar
+  googleOAuthClientId     String? @db.Text
+  googleOAuthClientSecret String? @db.Text
+
+  // Google Ads API
+  googleAdsDeveloperToken String? @db.Text
+  googleAdsClientId       String? @db.Text
+  googleAdsClientSecret   String? @db.Text
+  googleAdsRefreshToken   String? @db.Text
+
+  // Email Service (Resend, SendGrid, etc.)
+  emailProvider           String? // "resend", "sendgrid", "smtp"
+  emailApiKey             String? @db.Text
+  emailFromAddress        String?
+  emailFromName           String?
+
+  // SMTP (if using custom SMTP)
+  smtpHost     String?
+  smtpPort     Int?
+  smtpUser     String?
+  smtpPassword String? @db.Text
+  smtpSecure   Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
 }
