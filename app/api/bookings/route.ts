@@ -121,7 +121,7 @@ export async function POST(request: NextRequest) {
     const existingBooking = await prisma.booking.findFirst({
       where: {
         eventTypeId: data.eventTypeId,
-        status: { in: ['pending', 'confirmed'] },
+        status: { in: ['PENDING', 'CONFIRMED'] },
         OR: [
           {
             AND: [
@@ -156,7 +156,7 @@ export async function POST(request: NextRequest) {
     }
 
     // If event requires confirmation, create pending booking
-    const bookingStatus = eventType.requiresConfirmation ? 'pending' : 'confirmed'
+    const bookingStatus = eventType.requiresConfirmation ? 'PENDING' : 'CONFIRMED'
 
     // Create booking in database first
     const booking = await prisma.booking.create({
@@ -190,7 +190,7 @@ export async function POST(request: NextRequest) {
     let meetLink: string | undefined
 
     // Create Google Calendar event if booking is confirmed
-    if (bookingStatus === 'confirmed') {
+    if (bookingStatus === 'CONFIRMED') {
       try {
         const calendarEvent = await createCalendarEvent(eventType.userId, {
           summary: `${eventType.title} - ${data.attendeeName}`,
@@ -275,7 +275,7 @@ Booking ID: ${booking.id}`,
         createdAt: booking.createdAt.toISOString(),
       },
       message:
-        bookingStatus === 'confirmed'
+        bookingStatus === 'CONFIRMED'
           ? 'Booking confirmed! Check your email for details.'
           : 'Booking submitted! You will receive a confirmation email once approved.',
     }
