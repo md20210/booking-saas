@@ -49,9 +49,9 @@ const eventFormSchema = z.object({
     .int()
     .min(5, "Duration must be at least 5 minutes")
     .max(1440, "Duration cannot exceed 24 hours"),
-  bufferTime: z.number().int().min(0).max(120).default(0),
+  bufferTime: z.number().int().min(0).max(120),
   price: z.number().positive().optional(),
-  currency: z.string().length(3).default("EUR"),
+  currency: z.string().length(3),
 })
 
 type EventFormValues = z.infer<typeof eventFormSchema>
