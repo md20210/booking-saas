@@ -12,8 +12,8 @@ const createBookingSchema = z.object({
   attendeeEmail: z.string().email('Invalid email address'),
   attendeePhone: z.string().optional(),
   timezone: z.string().default('Europe/Berlin'),
-  customFields: z.record(z.any()).optional(),
-  utmParams: z.record(z.string()).optional(), // For tracking
+  customFields: z.record(z.string(), z.any()).optional(),
+  utmParams: z.record(z.string(), z.string()).optional(), // For tracking
   gclid: z.string().optional(), // Google Ads Click ID
   gbraid: z.string().optional(), // Google Ads Conversion tracking
   wbraid: z.string().optional(), // Google Ads Conversion tracking
