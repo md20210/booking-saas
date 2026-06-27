@@ -45,13 +45,13 @@ const eventFormSchema = z.object({
       "Slug must contain only lowercase letters, numbers, and hyphens"
     ),
   description: z.string().optional(),
-  duration: z.coerce
+  duration: z
     .number()
     .int()
     .min(5, "Duration must be at least 5 minutes")
     .max(1440, "Duration cannot exceed 24 hours"),
-  bufferTime: z.coerce.number().int().min(0).max(120).default(0),
-  price: z.coerce.number().nonnegative().optional().or(z.literal(0)),
+  bufferTime: z.number().int().min(0).max(120).default(0),
+  price: z.number().nonnegative().optional(),
   currency: z.string().length(3).default("EUR"),
 })
 
