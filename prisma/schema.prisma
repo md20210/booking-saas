@@ -356,10 +356,13 @@ model ApiCredentials {
   googleOAuthClientSecret String? @db.Text
 
   // Google Ads API
-  googleAdsDeveloperToken String? @db.Text
-  googleAdsClientId       String? @db.Text
-  googleAdsClientSecret   String? @db.Text
-  googleAdsRefreshToken   String? @db.Text
+  googleAdsDeveloperToken    String? @db.Text
+  googleAdsClientId          String? @db.Text
+  googleAdsClientSecret      String? @db.Text
+  googleAdsRefreshToken      String? @db.Text
+  googleAdsCustomerId        String? // Customer ID (without hyphens)
+  googleAdsLoginCustomerId   String? // Login Customer ID for MCC accounts
+  googleAdsConversionActionId String? // Conversion Action Resource Name
 
   // Email Service (Resend, SendGrid, etc.)
   emailProvider           String? // "resend", "sendgrid", "smtp"

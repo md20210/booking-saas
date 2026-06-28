@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
 import { createCalendarEvent } from '@/lib/google/calendar'
+import { sendBookingConversion } from '@/lib/conversion-tracking/google-ads'
 import { z } from 'zod'
 
 // Validation schema for creating bookings
@@ -244,6 +245,27 @@ Booking ID: ${booking.id}`,
             conversionSent: false, // Will be sent by tracking service
           },
         })
+
+        // Send conversion to Google Ads (CONTINUOUS mode only, for CONFIRMED bookings)
+        if (bookingStatus === 'CONFIRMED' && data.gclid) {
+          try {
+            // Check if tracking is in CONTINUOUS mode
+            const trackingSettings = await prisma.trackingSettings.findUnique({
+              where: { userId: eventType.userId },
+              select: { trackingMode: true, googleAdsEnabled: true }
+            })
+
+            if (trackingSettings?.googleAdsEnabled && trackingSettings.trackingMode === 'CONTINUOUS') {
+              // Send conversion asynchronously (don't block booking creation)
+              sendBookingConversion(booking.id).catch((error) => {
+                console.error('Failed to send conversion (non-blocking):', error)
+              })
+            }
+          } catch (trackingCheckError) {
+            console.error('Failed to check tracking settings:', trackingCheckError)
+            // Don't fail booking if tracking check fails
+          }
+        }
       } catch (trackingError) {
         console.error('Failed to create tracking data:', trackingError)
         // Don't fail booking if tracking fails

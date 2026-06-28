@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Calendar, Clock, Check, User, Mail, Phone, ChevronLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -43,6 +43,40 @@ export function CalendlyLayout({
     phone: "",
     notes: ""
   })
+
+  // Tracking parameters captured from URL
+  const [trackingParams, setTrackingParams] = useState<{
+    gclid?: string
+    gbraid?: string
+    wbraid?: string
+    utm_source?: string
+    utm_medium?: string
+    utm_campaign?: string
+    utm_term?: string
+    utm_content?: string
+  }>({})
+
+  // Capture tracking parameters from URL on mount
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    const params = new URLSearchParams(window.location.search)
+    const captured: typeof trackingParams = {}
+
+    // Google Ads Click IDs
+    if (params.get('gclid')) captured.gclid = params.get('gclid')!
+    if (params.get('gbraid')) captured.gbraid = params.get('gbraid')!
+    if (params.get('wbraid')) captured.wbraid = params.get('wbraid')!
+
+    // UTM Parameters
+    if (params.get('utm_source')) captured.utm_source = params.get('utm_source')!
+    if (params.get('utm_medium')) captured.utm_medium = params.get('utm_medium')!
+    if (params.get('utm_campaign')) captured.utm_campaign = params.get('utm_campaign')!
+    if (params.get('utm_term')) captured.utm_term = params.get('utm_term')!
+    if (params.get('utm_content')) captured.utm_content = params.get('utm_content')!
+
+    setTrackingParams(captured)
+  }, [])
 
   // Generate calendar days for current month
   const generateCalendar = () => {
@@ -91,7 +125,12 @@ export function CalendlyLayout({
       eventTypeId: eventType.id,
       date: selectedDate,
       time: selectedTime,
-      ...formData
+      ...formData,
+      // Include tracking parameters for Google Ads conversion tracking
+      trackingParams: Object.keys(trackingParams).length > 0 ? trackingParams : undefined,
+      gclid: trackingParams.gclid,
+      gbraid: trackingParams.gbraid,
+      wbraid: trackingParams.wbraid,
     }
 
     onBooking?.(bookingData)
