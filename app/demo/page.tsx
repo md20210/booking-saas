@@ -9,7 +9,7 @@ export default async function DemoPage() {
   // Get first public event to demo
   const publicEvent = await prisma.eventType.findFirst({
     where: {
-      isActive: true,
+      active: true,
     },
     select: {
       id: true,

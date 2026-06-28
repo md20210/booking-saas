@@ -1,0 +1,5 @@
+{
+  "project": "fearless-amazement",
+  "environment": "production",
+  "service": "booking-saas"
+}
