@@ -13,9 +13,11 @@ import { Button } from "@/components/ui/button"
 import { User, Settings, Key, LogOut } from "lucide-react"
 import Link from "next/link"
 import { LocaleSwitcher } from "@/components/locale-switcher"
+import { useTranslations } from "@/lib/i18n/useTranslations"
 
 export function DashboardHeader() {
   const { data: session } = useSession()
+  const { t } = useTranslations()
 
   const getUserInitials = (name?: string | null) => {
     if (!name) return "U"
@@ -34,7 +36,7 @@ export function DashboardHeader() {
   return (
     <header className="flex h-16 items-center justify-between border-b bg-card px-6">
       <div className="flex items-center">
-        <h1 className="text-lg font-semibold">Dashboard</h1>
+        <h1 className="text-lg font-semibold">{t('nav.dashboard')}</h1>
       </div>
 
       <div className="flex items-center gap-4">
@@ -70,7 +72,7 @@ export function DashboardHeader() {
             <DropdownMenuItem asChild>
               <Link href="/settings/profile" className="cursor-pointer">
                 <User className="mr-2 h-4 w-4" />
-                Profile
+                {t('settings.profile')}
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
@@ -82,7 +84,7 @@ export function DashboardHeader() {
             <DropdownMenuItem asChild>
               <Link href="/settings" className="cursor-pointer">
                 <Settings className="mr-2 h-4 w-4" />
-                Settings
+                {t('settings.title')}
               </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />

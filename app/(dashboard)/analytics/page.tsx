@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Calendar, TrendingUp, Users, DollarSign, Clock, ArrowUp, ArrowDown } from "lucide-react"
+import { useTranslations } from "@/lib/i18n/useTranslations"
 
 interface AnalyticsData {
   overview: {
@@ -24,6 +25,7 @@ interface AnalyticsData {
 }
 
 export default function AnalyticsPage() {
+  const { t } = useTranslations()
   const [loading, setLoading] = useState(true)
   const [data, setData] = useState<AnalyticsData | null>(null)
   const [timeRange, setTimeRange] = useState<"7d" | "30d" | "90d" | "1y">("30d")
@@ -55,7 +57,7 @@ export default function AnalyticsPage() {
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Loading analytics...</p>
+          <p className="text-muted-foreground">{t('common.loading')}</p>
         </div>
       </div>
     )
@@ -77,17 +79,17 @@ export default function AnalyticsPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Analytics</h1>
+          <h1 className="text-3xl font-bold tracking-tight">{t('analytics.title')}</h1>
           <p className="text-muted-foreground">
             Track your booking performance and conversions
           </p>
         </div>
         <Tabs value={timeRange} onValueChange={(v) => setTimeRange(v as typeof timeRange)}>
           <TabsList>
-            <TabsTrigger value="7d">7 Days</TabsTrigger>
-            <TabsTrigger value="30d">30 Days</TabsTrigger>
-            <TabsTrigger value="90d">90 Days</TabsTrigger>
-            <TabsTrigger value="1y">1 Year</TabsTrigger>
+            <TabsTrigger value="7d">{t('analytics.timeRange.7d')}</TabsTrigger>
+            <TabsTrigger value="30d">{t('analytics.timeRange.30d')}</TabsTrigger>
+            <TabsTrigger value="90d">{t('analytics.timeRange.90d')}</TabsTrigger>
+            <TabsTrigger value="1y">{t('analytics.timeRange.1y')}</TabsTrigger>
           </TabsList>
         </Tabs>
       </div>
@@ -97,7 +99,7 @@ export default function AnalyticsPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              Total Bookings
+              {t('analytics.totalBookings')}
             </CardTitle>
             <Calendar className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
@@ -126,7 +128,7 @@ export default function AnalyticsPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              Total Revenue
+              {t('analytics.totalRevenue')}
             </CardTitle>
             <DollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>

@@ -11,42 +11,44 @@ import {
   Plug,
   BarChart3
 } from "lucide-react"
-
-const navigationItems = [
-  {
-    name: "Dashboard",
-    href: "/dashboard",
-    icon: LayoutDashboard,
-  },
-  {
-    name: "Events",
-    href: "/events",
-    icon: Calendar,
-  },
-  {
-    name: "Analytics",
-    href: "/analytics",
-    icon: BarChart3,
-  },
-  {
-    name: "Design",
-    href: "/design",
-    icon: Palette,
-  },
-  {
-    name: "Integrations",
-    href: "/integrations",
-    icon: Plug,
-  },
-  {
-    name: "Settings",
-    href: "/settings",
-    icon: Settings,
-  },
-]
+import { useTranslations } from "@/lib/i18n/useTranslations"
 
 export function DashboardSidebar() {
   const pathname = usePathname()
+  const { t } = useTranslations()
+
+  const navigationItems = [
+    {
+      name: t('nav.dashboard'),
+      href: "/dashboard",
+      icon: LayoutDashboard,
+    },
+    {
+      name: t('nav.events'),
+      href: "/events",
+      icon: Calendar,
+    },
+    {
+      name: t('nav.analytics'),
+      href: "/analytics",
+      icon: BarChart3,
+    },
+    {
+      name: t('nav.design'),
+      href: "/design",
+      icon: Palette,
+    },
+    {
+      name: t('nav.integrations'),
+      href: "/integrations",
+      icon: Plug,
+    },
+    {
+      name: t('nav.settings'),
+      href: "/settings",
+      icon: Settings,
+    },
+  ]
 
   return (
     <aside className="flex h-full w-64 flex-col border-r bg-card">
