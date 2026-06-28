@@ -28,7 +28,7 @@ export async function createAuditLog(data: AuditLogData) {
     console.error('Failed to create audit log:', error)
     Sentry.captureException(error, {
       tags: { component: 'audit-log' },
-      extra: data,
+      extra: { auditData: JSON.stringify(data) },
     })
   }
 }
