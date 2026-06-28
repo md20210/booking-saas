@@ -8,7 +8,8 @@ import {
   Calendar,
   Palette,
   Settings,
-  Plug
+  Plug,
+  BarChart3
 } from "lucide-react"
 
 const navigationItems = [
@@ -21,6 +22,11 @@ const navigationItems = [
     name: "Events",
     href: "/events",
     icon: Calendar,
+  },
+  {
+    name: "Analytics",
+    href: "/analytics",
+    icon: BarChart3,
   },
   {
     name: "Design",

@@ -263,6 +263,9 @@ model TrackingSettings {
   // Enhanced Conversions
   enhancedConversionsEnabled Boolean @default(false)
 
+  // Microsoft Clarity
+  microsoftClarityId String?
+
   // Tracking Mode
   trackingMode  TrackingMode @default(CONTINUOUS)
 
