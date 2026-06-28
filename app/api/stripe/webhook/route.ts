@@ -4,6 +4,7 @@ import { prisma } from '@/lib/db'
 import { createCalendarEvent } from '@/lib/google/calendar'
 import { createOutlookCalendarEvent } from '@/lib/calendar/outlook'
 import { sendBookingConversion } from '@/lib/conversion-tracking/google-ads'
+import { scheduleReminders } from '@/lib/email/reminder'
 import Stripe from 'stripe'
 
 export async function POST(request: NextRequest) {
@@ -191,6 +192,14 @@ Payment: ${booking.paymentCurrency} ${booking.paymentAmount}`
           } catch (error) {
             console.error('Failed to send conversion tracking:', error)
           }
+        }
+
+        // Schedule reminders
+        try {
+          await scheduleReminders(booking.id)
+          console.log(`✅ Scheduled reminders for booking ${booking.id}`)
+        } catch (error) {
+          console.error('Failed to schedule reminders:', error)
         }
 
         // TODO: Send confirmation email

@@ -31,8 +31,10 @@ model User {
   designSettings DesignSettings?
   googleIntegration GoogleIntegration?
   outlookIntegration OutlookIntegration?
+  zoomIntegration ZoomIntegration?
   trackingSettings TrackingSettings?
   paymentSettings PaymentSettings?
+  reminderSettings ReminderSettings?
   apiKeys       ApiKey[]
   apiCredentials ApiCredentials?
   auditLogs     AuditLog[]
@@ -109,6 +111,10 @@ model EventType {
   price       Decimal? @db.Decimal(10, 2)
   currency    String   @default("EUR")
 
+  // Video Conference
+  videoProvider String @default("google_meet") // "google_meet" | "teams" | "zoom" | "custom"
+  customVideoUrl String? // For custom video provider
+
   // Custom Fields/Questions
   customFields Json?   // Array of custom question objects
 
@@ -165,8 +171,14 @@ model Booking {
   outlookEventId String?
   teamsMeetLink String?
 
+  // Zoom
+  zoomMeetLink String?
+
   // Tracking
   trackingData TrackingData?
+
+  // Reminders
+  reminders Reminder[]
 
   // Payment
   paymentStatus PaymentStatus @default(PENDING)
@@ -563,4 +575,72 @@ enum WebhookEvent {
   BOOKING_COMPLETED
   PAYMENT_SUCCEEDED
   PAYMENT_FAILED
+}
+
+// ============================================
+// ZOOM INTEGRATION
+// ============================================
+
+model ZoomIntegration {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // OAuth2 Tokens
+  accessToken   String  @db.Text
+  refreshToken  String? @db.Text
+  expiresAt     DateTime?
+
+  // Status
+  active        Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+// ============================================
+// REMINDERS (Email & SMS)
+// ============================================
+
+model Reminder {
+  id        String       @id @default(cuid())
+  bookingId String
+  booking   Booking      @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  type      ReminderType // email or sms
+  sendAt    DateTime
+  sent      Boolean      @default(false)
+  sentAt    DateTime?
+
+  createdAt DateTime @default(now())
+
+  @@index([bookingId])
+  @@index([sendAt, sent])
+}
+
+enum ReminderType {
+  email
+  sms
+}
+
+model ReminderSettings {
+  id                   String  @id @default(cuid())
+  userId               String  @unique
+  user                 User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Email Reminders
+  email1HourBefore     Boolean @default(true)
+  email24HoursBefore   Boolean @default(true)
+  email1WeekBefore     Boolean @default(false)
+
+  // SMS Reminders
+  sms1HourBefore       Boolean @default(false)
+  sms24HoursBefore     Boolean @default(false)
+
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  @@index([userId])
 }
