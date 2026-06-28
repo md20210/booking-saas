@@ -161,17 +161,16 @@ export async function POST(request: NextRequest) {
     // Create booking in database first
     const booking = await prisma.booking.create({
       data: {
+        userId: eventType.userId,
         eventTypeId: data.eventTypeId,
-        attendeeName: data.attendeeName,
-        attendeeEmail: data.attendeeEmail,
-        attendeePhone: data.attendeePhone,
+        guestName: data.attendeeName,
+        guestEmail: data.attendeeEmail,
+        guestPhone: data.attendeePhone,
         startTime,
         endTime,
         timezone: data.timezone,
-        customFields: data.customFields || {},
+        customFieldsData: data.customFields || {},
         status: bookingStatus,
-        price: eventType.price,
-        currency: eventType.currency,
       },
       include: {
         eventType: {
