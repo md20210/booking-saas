@@ -99,6 +99,22 @@ export default async function DashboardPage() {
           </p>
         </a>
 
+        {/* Google Ads Tracking Card */}
+        <a
+          href="/settings/google-ads"
+          className="block p-6 bg-white rounded-lg border border-gray-200 hover:border-blue-500 hover:shadow-lg transition-all"
+        >
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
+              <span className="text-2xl">📊</span>
+            </div>
+            <h2 className="text-xl font-semibold">Google Ads Tracking</h2>
+          </div>
+          <p className="text-gray-600 text-sm">
+            Server-side conversion tracking setup
+          </p>
+        </a>
+
         {/* Settings Card */}
         <a
           href="/settings"
