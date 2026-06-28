@@ -68,7 +68,7 @@ async function runTests() {
     if (!submitButton) throw new Error('Submit button not found')
 
     await submitButton.click()
-    await page.waitForTimeout(500)
+    await new Promise((resolve) => setTimeout(resolve, 500))
 
     // Check for HTML5 validation or error message
     const emailInput = await page.$('input[type="email"]')
