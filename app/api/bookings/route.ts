@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
 import { createCalendarEvent } from '@/lib/google/calendar'
+import { createOutlookCalendarEvent } from '@/lib/calendar/outlook'
 import { sendBookingConversion } from '@/lib/conversion-tracking/google-ads'
 import { z } from 'zod'
 
@@ -57,6 +58,11 @@ export async function POST(request: NextRequest) {
                 active: true,
               },
             },
+            outlookIntegration: {
+              select: {
+                active: true,
+              },
+            },
           },
         },
       },
@@ -76,12 +82,15 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Check if Google Calendar is connected
-    if (!eventType.user.googleIntegration?.active) {
+    // Check if at least one calendar integration is connected
+    const hasGoogleCalendar = eventType.user.googleIntegration?.active
+    const hasOutlookCalendar = eventType.user.outlookIntegration?.active
+
+    if (!hasGoogleCalendar && !hasOutlookCalendar) {
       return NextResponse.json(
         {
           error: 'Calendar integration not available',
-          message: 'The event owner has not connected their Google Calendar.',
+          message: 'The event owner has not connected a calendar (Google or Outlook).',
         },
         { status: 424 }
       )
@@ -186,15 +195,14 @@ export async function POST(request: NextRequest) {
       },
     })
 
-    let calendarEventId: string | undefined
-    let meetLink: string | undefined
+    let googleEventId: string | undefined
+    let googleMeetLink: string | undefined
+    let outlookEventId: string | undefined
+    let teamsMeetLink: string | undefined
 
-    // Create Google Calendar event if booking is confirmed
+    // Create calendar events if booking is confirmed
     if (bookingStatus === 'CONFIRMED') {
-      try {
-        const calendarEvent = await createCalendarEvent(eventType.userId, {
-          summary: `${eventType.title} - ${data.attendeeName}`,
-          description: `Booking via BookingSaaS
+      const eventDescription = `Booking via BookingSaaS
 
 Event: ${eventType.title}
 ${eventType.description ? `Description: ${eventType.description}\n` : ''}
@@ -203,28 +211,64 @@ Email: ${data.attendeeEmail}
 ${data.attendeePhone ? `Phone: ${data.attendeePhone}\n` : ''}
 Timezone: ${data.timezone}
 
-Booking ID: ${booking.id}`,
-          startTime,
-          endTime,
-          attendees: [data.attendeeEmail],
-          timezone: data.timezone,
-        })
+Booking ID: ${booking.id}`
 
-        calendarEventId = calendarEvent.eventId || undefined
-        meetLink = calendarEvent.meetLink || undefined
+      // Create Google Calendar event if Google is connected
+      if (hasGoogleCalendar) {
+        try {
+          const calendarEvent = await createCalendarEvent(eventType.userId, {
+            summary: `${eventType.title} - ${data.attendeeName}`,
+            description: eventDescription,
+            startTime,
+            endTime,
+            attendees: [data.attendeeEmail],
+            timezone: data.timezone,
+          })
 
-        // Update booking with calendar event details
+          googleEventId = calendarEvent.eventId || undefined
+          googleMeetLink = calendarEvent.meetLink || undefined
+
+          console.log(`✅ Created Google Calendar event for booking ${booking.id}`)
+        } catch (calendarError) {
+          console.error('Failed to create Google Calendar event:', calendarError)
+          // Don't fail the booking if calendar creation fails
+        }
+      }
+
+      // Create Outlook Calendar event if Outlook is connected
+      if (hasOutlookCalendar) {
+        try {
+          const outlookEvent = await createOutlookCalendarEvent(eventType.userId, {
+            summary: `${eventType.title} - ${data.attendeeName}`,
+            description: eventDescription,
+            startTime,
+            endTime,
+            attendees: [data.attendeeEmail],
+            timezone: data.timezone,
+            includeTeamsMeeting: true,
+          })
+
+          outlookEventId = outlookEvent.eventId
+          teamsMeetLink = outlookEvent.meetLink
+
+          console.log(`✅ Created Outlook Calendar event for booking ${booking.id}`)
+        } catch (outlookError) {
+          console.error('Failed to create Outlook Calendar event:', outlookError)
+          // Don't fail the booking if calendar creation fails
+        }
+      }
+
+      // Update booking with calendar event details
+      if (googleEventId || outlookEventId) {
         await prisma.booking.update({
           where: { id: booking.id },
           data: {
-            googleEventId: calendarEventId,
-            googleMeetLink: meetLink,
+            googleEventId,
+            googleMeetLink,
+            outlookEventId,
+            teamsMeetLink,
           },
         })
-      } catch (calendarError) {
-        console.error('Failed to create calendar event:', calendarError)
-        // Don't fail the booking if calendar creation fails
-        // The event owner can manually add it later
       }
     }
 
@@ -291,7 +335,9 @@ Booking ID: ${booking.id}`,
         endTime: booking.endTime.toISOString(),
         timezone: booking.timezone,
         status: booking.status,
-        meetLink: meetLink || booking.googleMeetLink,
+        googleMeetLink: googleMeetLink || booking.googleMeetLink,
+        teamsMeetLink: teamsMeetLink || booking.teamsMeetLink,
+        meetLink: googleMeetLink || teamsMeetLink || booking.googleMeetLink || booking.teamsMeetLink,
         createdAt: booking.createdAt.toISOString(),
       },
       message:

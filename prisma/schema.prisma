@@ -21,6 +21,7 @@ model User {
   emailVerified DateTime?
   image         String?
   password      String?   // For credentials auth
+  onboardingCompleted Boolean @default(false)
 
   // Relations
   accounts      Account[]
@@ -29,6 +30,7 @@ model User {
   bookings      Booking[]
   designSettings DesignSettings?
   googleIntegration GoogleIntegration?
+  outlookIntegration OutlookIntegration?
   trackingSettings TrackingSettings?
   apiKeys       ApiKey[]
   apiCredentials ApiCredentials?
@@ -156,6 +158,10 @@ model Booking {
   googleEventId String?
   googleMeetLink String?
 
+  // Outlook Calendar
+  outlookEventId String?
+  teamsMeetLink String?
+
   // Tracking
   trackingData TrackingData?
 
@@ -197,6 +203,38 @@ model GoogleIntegration {
 
   // Calendar Settings
   calendarId    String  @default("primary")
+
+  // Status
+  active        Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+// ============================================
+// OUTLOOK/MICROSOFT INTEGRATIONS
+// ============================================
+
+model OutlookIntegration {
+  id            String  @id @default(cuid())
+  userId        String  @unique
+  user          User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // OAuth2 Tokens (Microsoft Graph API)
+  accessToken   String  @db.Text
+  refreshToken  String  @db.Text
+  expiresAt     DateTime
+  scope         String
+
+  // Calendar Settings
+  calendarId    String  @default("primary") // Outlook calendar ID
+  calendarName  String? // Display name
+
+  // User Info
+  email         String?
+  displayName   String?
 
   // Status
   active        Boolean @default(true)
