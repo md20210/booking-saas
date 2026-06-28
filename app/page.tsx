@@ -88,17 +88,17 @@ export default function Home() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a
-              href="/api/auth/signin"
+            <Link
+              href="/register"
               className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-lg transition-colors text-lg"
             >
-              Sign In / Register
-            </a>
+              Get Started
+            </Link>
             <Link
-              href="/dashboard"
+              href="/api/auth/signin"
               className="px-8 py-4 bg-white hover:bg-gray-50 text-gray-900 font-semibold rounded-lg shadow-lg transition-colors text-lg border-2 border-gray-200"
             >
-              Dashboard
+              Sign In
             </Link>
           </div>
 
