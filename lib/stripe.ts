@@ -1,9 +1,17 @@
 import Stripe from 'stripe'
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
-  apiVersion: '2026-06-24.dahlia',
-  typescript: true,
-})
+function getStripe(): Stripe {
+  const apiKey = process.env.STRIPE_SECRET_KEY
+
+  if (!apiKey) {
+    throw new Error('STRIPE_SECRET_KEY is not configured')
+  }
+
+  return new Stripe(apiKey, {
+    apiVersion: '2026-06-24.dahlia',
+    typescript: true,
+  })
+}
 
 export async function createCheckoutSession({
   priceAmount,
@@ -20,7 +28,8 @@ export async function createCheckoutSession({
   successUrl: string
   cancelUrl: string
 }) {
-  const session = await stripe.checkout.sessions.create({
+  const stripeClient = getStripe()
+  const session = await stripeClient.checkout.sessions.create({
     payment_method_types: ['card'],
     line_items: [
       {
@@ -48,11 +57,13 @@ export async function createCheckoutSession({
 }
 
 export async function getPaymentIntent(paymentIntentId: string) {
-  return await stripe.paymentIntents.retrieve(paymentIntentId)
+  const stripeClient = getStripe()
+  return await stripeClient.paymentIntents.retrieve(paymentIntentId)
 }
 
 export async function refundPayment(paymentIntentId: string) {
-  return await stripe.refunds.create({
+  const stripeClient = getStripe()
+  return await stripeClient.refunds.create({
     payment_intent: paymentIntentId,
   })
 }

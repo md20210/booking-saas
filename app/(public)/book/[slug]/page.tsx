@@ -167,26 +167,49 @@ export default function PublicBookingPage() {
         wbraid,
       }
 
-      const response = await fetch("/api/bookings", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(bookingData),
-      })
+      // If event has a price, redirect to Stripe Checkout
+      if (eventType.price && eventType.price > 0) {
+        const response = await fetch("/api/stripe/checkout", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(bookingData),
+        })
 
-      const result = await response.json()
+        const result = await response.json()
 
-      if (!response.ok) {
-        throw new Error(result.error || "Failed to create booking")
+        if (!response.ok) {
+          throw new Error(result.error || "Failed to create payment session")
+        }
+
+        // Redirect to Stripe Checkout
+        if (result.url) {
+          window.location.href = result.url
+          return
+        }
+      } else {
+        // Free booking - create directly
+        const response = await fetch("/api/bookings", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(bookingData),
+        })
+
+        const result = await response.json()
+
+        if (!response.ok) {
+          throw new Error(result.error || "Failed to create booking")
+        }
+
+        setBooking(result.booking)
+        setCurrentStep("confirmed")
       }
-
-      setBooking(result.booking)
-      setCurrentStep("confirmed")
     } catch (err) {
       console.error("Error creating booking:", err)
       alert(err instanceof Error ? err.message : "Failed to create booking")
-    } finally {
       setCreating(false)
     }
   }
@@ -529,7 +552,9 @@ export default function PublicBookingPage() {
 
                     <Button type="submit" className="w-full" disabled={creating}>
                       {creating && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                      Confirm Booking
+                      {eventType.price && eventType.price > 0
+                        ? `Proceed to Payment (${eventType.currency} ${eventType.price})`
+                        : "Confirm Booking"}
                     </Button>
                   </form>
                 )}
