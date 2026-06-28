@@ -210,14 +210,14 @@ Booking ID: ${booking.id}`,
         })
 
         calendarEventId = calendarEvent.eventId || undefined
-        meetLink = calendarEvent.meetLink
+        meetLink = calendarEvent.meetLink || undefined
 
         // Update booking with calendar event details
         await prisma.booking.update({
           where: { id: booking.id },
           data: {
-            googleCalendarEventId: calendarEventId,
-            meetLink,
+            googleEventId: calendarEventId,
+            googleMeetLink: meetLink,
           },
         })
       } catch (calendarError) {
