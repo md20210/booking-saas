@@ -32,9 +32,12 @@ model User {
   googleIntegration GoogleIntegration?
   outlookIntegration OutlookIntegration?
   trackingSettings TrackingSettings?
+  paymentSettings PaymentSettings?
   apiKeys       ApiKey[]
   apiCredentials ApiCredentials?
   auditLogs     AuditLog[]
+  teamMembers   TeamMember[]
+  webhooks      Webhook[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -164,6 +167,14 @@ model Booking {
 
   // Tracking
   trackingData TrackingData?
+
+  // Payment
+  paymentStatus PaymentStatus @default(PENDING)
+  paymentAmount Decimal? @db.Decimal(10, 2)
+  paymentCurrency String? @default("EUR")
+  stripePaymentIntentId String?
+  stripeCheckoutSessionId String?
+  paidAt DateTime?
 
   // Metadata
   notes       String?  @db.Text
@@ -446,4 +457,110 @@ model AuditLog {
   @@index([userId])
   @@index([action])
   @@index([createdAt])
+}
+
+// ============================================
+// PAYMENTS & STRIPE
+// ============================================
+
+model PaymentSettings {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Stripe
+  stripeAccountId String? // Connected Stripe Account ID
+  stripePublishableKey String?
+  stripeSecretKey String? @db.Text
+  stripeEnabled Boolean @default(false)
+
+  // Default Currency
+  defaultCurrency String @default("EUR")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  SUCCEEDED
+  FAILED
+  REFUNDED
+  CANCELLED
+}
+
+// ============================================
+// TEAM SCHEDULING
+// ============================================
+
+model TeamMember {
+  id        String   @id @default(cuid())
+  userId    String   // Owner of the team
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  name      String
+  email     String
+  role      TeamMemberRole @default(MEMBER)
+
+  // Calendar Integration
+  googleCalendarId String?
+  outlookCalendarId String?
+
+  // Availability (JSON: working hours per day)
+  availability Json?
+
+  // Round Robin
+  active    Boolean @default(true)
+  priority  Int @default(0) // Higher priority = more bookings
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([email])
+}
+
+enum TeamMemberRole {
+  ADMIN
+  MEMBER
+}
+
+// ============================================
+// WEBHOOKS (for Zapier/n8n/Make)
+// ============================================
+
+model Webhook {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  name      String
+  url       String   @db.Text
+  secret    String?  @db.Text // Optional signing secret
+
+  // Events to trigger on
+  events    WebhookEvent[]
+
+  // Status
+  active    Boolean @default(true)
+  lastTriggeredAt DateTime?
+  failureCount Int @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([active])
+}
+
+enum WebhookEvent {
+  BOOKING_CREATED
+  BOOKING_CANCELLED
+  BOOKING_RESCHEDULED
+  BOOKING_COMPLETED
+  PAYMENT_SUCCEEDED
+  PAYMENT_FAILED
 }
