@@ -53,11 +53,6 @@ export const authOptions: NextAuthOptions = {
     strategy: 'jwt',
   },
 
-  pages: {
-    signIn: '/auth/signin',
-    error: '/auth/error',
-  },
-
   callbacks: {
     async jwt({ token, user, account }) {
       if (user) {
