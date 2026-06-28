@@ -1,0 +1,145 @@
+{
+  "nav": {
+    "dashboard": "控制台",
+    "events": "活动",
+    "analytics": "分析",
+    "design": "设计",
+    "integrations": "集成",
+    "settings": "设置"
+  },
+  "dashboard": {
+    "welcome": "欢迎回来",
+    "overview": "概览",
+    "recentBookings": "最近预订",
+    "upcomingEvents": "即将举行的活动",
+    "stats": {
+      "totalBookings": "总预订数",
+      "totalRevenue": "总收入",
+      "activeEvents": "活跃活动",
+      "conversionRate": "转化率"
+    }
+  },
+  "analytics": {
+    "title": "分析",
+    "overview": "概览",
+    "totalBookings": "总预订数",
+    "totalRevenue": "总收入",
+    "avgBookingValue": "平均预订价值",
+    "conversionRate": "转化率",
+    "bookingsByDay": "每日预订",
+    "bookingsByEventType": "按活动类型预订",
+    "bookingsByStatus": "按状态预订",
+    "topPerformers": "最佳表现",
+    "timeRange": {
+      "7d": "最近7天",
+      "30d": "最近30天",
+      "90d": "最近90天",
+      "1y": "最近一年"
+    },
+    "trends": {
+      "up": "较上期增长",
+      "down": "较上期下降"
+    }
+  },
+  "events": {
+    "title": "活动类型",
+    "create": "创建活动",
+    "edit": "编辑活动",
+    "delete": "删除活动",
+    "active": "活跃",
+    "inactive": "非活跃",
+    "duration": "持续时间",
+    "price": "价格",
+    "description": "描述"
+  },
+  "design": {
+    "title": "设计设置",
+    "colors": "颜色",
+    "fonts": "字体",
+    "layout": "布局",
+    "preview": "预览",
+    "primaryColor": "主要颜色",
+    "backgroundColor": "背景颜色",
+    "textColor": "文字颜色",
+    "fontFamily": "字体系列",
+    "template": "模板"
+  },
+  "integrations": {
+    "title": "集成",
+    "google": "Google Calendar",
+    "outlook": "Outlook Calendar",
+    "googleAds": "Google Ads",
+    "microsoftClarity": "Microsoft Clarity",
+    "connect": "连接",
+    "disconnect": "断开连接",
+    "connected": "已连接",
+    "notConnected": "未连接"
+  },
+  "settings": {
+    "title": "设置",
+    "profile": "个人资料",
+    "account": "账户",
+    "billing": "账单",
+    "analytics": "分析",
+    "notifications": "通知",
+    "save": "保存更改",
+    "cancel": "取消"
+  },
+  "booking": {
+    "title": "预订预约",
+    "selectDate": "选择日期",
+    "selectTime": "选择时间",
+    "yourInfo": "您的信息",
+    "name": "姓名",
+    "email": "电子邮件",
+    "phone": "电话",
+    "notes": "备注",
+    "confirm": "确认预订",
+    "cancel": "取消",
+    "success": "预订已确认！",
+    "error": "预订失败。请重试。"
+  },
+  "onboarding": {
+    "title": "欢迎使用BookingSaaS",
+    "subtitle": "让我们设置您的账户",
+    "steps": {
+      "createEvent": "创建您的第一个活动",
+      "connectCalendar": "连接您的日历",
+      "customizeDesign": "自定义您的设计",
+      "complete": "完成设置"
+    },
+    "createDefaultSetup": "创建默认设置",
+    "skip": "暂时跳过",
+    "next": "下一步",
+    "previous": "上一步",
+    "finish": "完成"
+  },
+  "common": {
+    "loading": "加载中...",
+    "error": "错误",
+    "success": "成功",
+    "submit": "提交",
+    "cancel": "取消",
+    "save": "保存",
+    "delete": "删除",
+    "edit": "编辑",
+    "create": "创建",
+    "search": "搜索",
+    "filter": "筛选",
+    "export": "导出",
+    "import": "导入",
+    "yes": "是",
+    "no": "否",
+    "close": "关闭",
+    "back": "返回",
+    "next": "下一步",
+    "previous": "上一步"
+  },
+  "errors": {
+    "unauthorized": "未授权。请登录。",
+    "notFound": "未找到",
+    "serverError": "服务器错误。请重试。",
+    "validationError": "请检查您的输入。",
+    "networkError": "网络错误。请检查您的连接。"
+  }
+}

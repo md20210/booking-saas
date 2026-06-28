@@ -1,0 +1,145 @@
+{
+  "nav": {
+    "dashboard": "Panel",
+    "events": "Wydarzenia",
+    "analytics": "Analityka",
+    "design": "Design",
+    "integrations": "Integracje",
+    "settings": "Ustawienia"
+  },
+  "dashboard": {
+    "welcome": "Witaj ponownie",
+    "overview": "Przegląd",
+    "recentBookings": "Ostatnie rezerwacje",
+    "upcomingEvents": "Nadchodzące wydarzenia",
+    "stats": {
+      "totalBookings": "Łączna liczba rezerwacji",
+      "totalRevenue": "Całkowity przychód",
+      "activeEvents": "Aktywne wydarzenia",
+      "conversionRate": "Współczynnik konwersji"
+    }
+  },
+  "analytics": {
+    "title": "Analityka",
+    "overview": "Przegląd",
+    "totalBookings": "Łączna liczba rezerwacji",
+    "totalRevenue": "Całkowity przychód",
+    "avgBookingValue": "Średnia wartość rezerwacji",
+    "conversionRate": "Współczynnik konwersji",
+    "bookingsByDay": "Rezerwacje według dni",
+    "bookingsByEventType": "Rezerwacje według typu wydarzenia",
+    "bookingsByStatus": "Rezerwacje według statusu",
+    "topPerformers": "Najlepsze wyniki",
+    "timeRange": {
+      "7d": "Ostatnie 7 dni",
+      "30d": "Ostatnie 30 dni",
+      "90d": "Ostatnie 90 dni",
+      "1y": "Ostatni rok"
+    },
+    "trends": {
+      "up": "Wzrost w porównaniu z poprzednim okresem",
+      "down": "Spadek w porównaniu z poprzednim okresem"
+    }
+  },
+  "events": {
+    "title": "Typy wydarzeń",
+    "create": "Utwórz wydarzenie",
+    "edit": "Edytuj wydarzenie",
+    "delete": "Usuń wydarzenie",
+    "active": "Aktywne",
+    "inactive": "Nieaktywne",
+    "duration": "Czas trwania",
+    "price": "Cena",
+    "description": "Opis"
+  },
+  "design": {
+    "title": "Ustawienia designu",
+    "colors": "Kolory",
+    "fonts": "Czcionki",
+    "layout": "Układ",
+    "preview": "Podgląd",
+    "primaryColor": "Kolor podstawowy",
+    "backgroundColor": "Kolor tła",
+    "textColor": "Kolor tekstu",
+    "fontFamily": "Rodzina czcionek",
+    "template": "Szablon"
+  },
+  "integrations": {
+    "title": "Integracje",
+    "google": "Google Calendar",
+    "outlook": "Outlook Calendar",
+    "googleAds": "Google Ads",
+    "microsoftClarity": "Microsoft Clarity",
+    "connect": "Połącz",
+    "disconnect": "Rozłącz",
+    "connected": "Połączono",
+    "notConnected": "Nie połączono"
+  },
+  "settings": {
+    "title": "Ustawienia",
+    "profile": "Profil",
+    "account": "Konto",
+    "billing": "Rozliczenia",
+    "analytics": "Analityka",
+    "notifications": "Powiadomienia",
+    "save": "Zapisz zmiany",
+    "cancel": "Anuluj"
+  },
+  "booking": {
+    "title": "Zarezerwuj spotkanie",
+    "selectDate": "Wybierz datę",
+    "selectTime": "Wybierz godzinę",
+    "yourInfo": "Twoje informacje",
+    "name": "Imię",
+    "email": "E-mail",
+    "phone": "Telefon",
+    "notes": "Notatki",
+    "confirm": "Potwierdź rezerwację",
+    "cancel": "Anuluj",
+    "success": "Rezerwacja potwierdzona!",
+    "error": "Rezerwacja nie powiodła się. Spróbuj ponownie."
+  },
+  "onboarding": {
+    "title": "Witaj w BookingSaaS",
+    "subtitle": "Skonfigurujmy Twoje konto",
+    "steps": {
+      "createEvent": "Utwórz pierwsze wydarzenie",
+      "connectCalendar": "Połącz swój kalendarz",
+      "customizeDesign": "Dostosuj swój design",
+      "complete": "Zakończ konfigurację"
+    },
+    "createDefaultSetup": "Utwórz domyślną konfigurację",
+    "skip": "Pomiń na razie",
+    "next": "Dalej",
+    "previous": "Wstecz",
+    "finish": "Zakończ"
+  },
+  "common": {
+    "loading": "Ładowanie...",
+    "error": "Błąd",
+    "success": "Sukces",
+    "submit": "Wyślij",
+    "cancel": "Anuluj",
+    "save": "Zapisz",
+    "delete": "Usuń",
+    "edit": "Edytuj",
+    "create": "Utwórz",
+    "search": "Szukaj",
+    "filter": "Filtruj",
+    "export": "Eksportuj",
+    "import": "Importuj",
+    "yes": "Tak",
+    "no": "Nie",
+    "close": "Zamknij",
+    "back": "Wstecz",
+    "next": "Dalej",
+    "previous": "Wstecz"
+  },
+  "errors": {
+    "unauthorized": "Brak autoryzacji. Zaloguj się.",
+    "notFound": "Nie znaleziono",
+    "serverError": "Błąd serwera. Spróbuj ponownie.",
+    "validationError": "Sprawdź swoje dane.",
+    "networkError": "Błąd sieci. Sprawdź swoje połączenie."
+  }
+}

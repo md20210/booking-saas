@@ -1,0 +1,145 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "events": "Eventi",
+    "analytics": "Analisi",
+    "design": "Design",
+    "integrations": "Integrazioni",
+    "settings": "Impostazioni"
+  },
+  "dashboard": {
+    "welcome": "Bentornato",
+    "overview": "Panoramica",
+    "recentBookings": "Prenotazioni recenti",
+    "upcomingEvents": "Eventi in arrivo",
+    "stats": {
+      "totalBookings": "Prenotazioni totali",
+      "totalRevenue": "Ricavo totale",
+      "activeEvents": "Eventi attivi",
+      "conversionRate": "Tasso di conversione"
+    }
+  },
+  "analytics": {
+    "title": "Analisi",
+    "overview": "Panoramica",
+    "totalBookings": "Prenotazioni totali",
+    "totalRevenue": "Ricavo totale",
+    "avgBookingValue": "Valore medio prenotazione",
+    "conversionRate": "Tasso di conversione",
+    "bookingsByDay": "Prenotazioni per giorno",
+    "bookingsByEventType": "Prenotazioni per tipo di evento",
+    "bookingsByStatus": "Prenotazioni per stato",
+    "topPerformers": "Migliori risultati",
+    "timeRange": {
+      "7d": "Ultimi 7 giorni",
+      "30d": "Ultimi 30 giorni",
+      "90d": "Ultimi 90 giorni",
+      "1y": "Ultimo anno"
+    },
+    "trends": {
+      "up": "In aumento rispetto al periodo precedente",
+      "down": "In calo rispetto al periodo precedente"
+    }
+  },
+  "events": {
+    "title": "Tipi di eventi",
+    "create": "Crea evento",
+    "edit": "Modifica evento",
+    "delete": "Elimina evento",
+    "active": "Attivo",
+    "inactive": "Inattivo",
+    "duration": "Durata",
+    "price": "Prezzo",
+    "description": "Descrizione"
+  },
+  "design": {
+    "title": "Impostazioni di design",
+    "colors": "Colori",
+    "fonts": "Font",
+    "layout": "Layout",
+    "preview": "Anteprima",
+    "primaryColor": "Colore primario",
+    "backgroundColor": "Colore di sfondo",
+    "textColor": "Colore del testo",
+    "fontFamily": "Famiglia di font",
+    "template": "Modello"
+  },
+  "integrations": {
+    "title": "Integrazioni",
+    "google": "Google Calendar",
+    "outlook": "Outlook Calendar",
+    "googleAds": "Google Ads",
+    "microsoftClarity": "Microsoft Clarity",
+    "connect": "Connetti",
+    "disconnect": "Disconnetti",
+    "connected": "Connesso",
+    "notConnected": "Non connesso"
+  },
+  "settings": {
+    "title": "Impostazioni",
+    "profile": "Profilo",
+    "account": "Account",
+    "billing": "Fatturazione",
+    "analytics": "Analisi",
+    "notifications": "Notifiche",
+    "save": "Salva modifiche",
+    "cancel": "Annulla"
+  },
+  "booking": {
+    "title": "Prenota un appuntamento",
+    "selectDate": "Seleziona una data",
+    "selectTime": "Seleziona un orario",
+    "yourInfo": "Le tue informazioni",
+    "name": "Nome",
+    "email": "Email",
+    "phone": "Telefono",
+    "notes": "Note",
+    "confirm": "Conferma prenotazione",
+    "cancel": "Annulla",
+    "success": "Prenotazione confermata!",
+    "error": "Prenotazione fallita. Riprova."
+  },
+  "onboarding": {
+    "title": "Benvenuto su BookingSaaS",
+    "subtitle": "Configuriamo il tuo account",
+    "steps": {
+      "createEvent": "Crea il tuo primo evento",
+      "connectCalendar": "Connetti il tuo calendario",
+      "customizeDesign": "Personalizza il tuo design",
+      "complete": "Completa la configurazione"
+    },
+    "createDefaultSetup": "Crea configurazione predefinita",
+    "skip": "Salta per ora",
+    "next": "Avanti",
+    "previous": "Indietro",
+    "finish": "Finisci"
+  },
+  "common": {
+    "loading": "Caricamento...",
+    "error": "Errore",
+    "success": "Successo",
+    "submit": "Invia",
+    "cancel": "Annulla",
+    "save": "Salva",
+    "delete": "Elimina",
+    "edit": "Modifica",
+    "create": "Crea",
+    "search": "Cerca",
+    "filter": "Filtra",
+    "export": "Esporta",
+    "import": "Importa",
+    "yes": "Sì",
+    "no": "No",
+    "close": "Chiudi",
+    "back": "Indietro",
+    "next": "Avanti",
+    "previous": "Indietro"
+  },
+  "errors": {
+    "unauthorized": "Non autorizzato. Effettua il login.",
+    "notFound": "Non trovato",
+    "serverError": "Errore del server. Riprova.",
+    "validationError": "Controlla i tuoi dati.",
+    "networkError": "Errore di rete. Controlla la tua connessione."
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "events": "Termine",
+    "analytics": "Analytik",
+    "design": "Design",
+    "integrations": "Integrationen",
+    "settings": "Einstellungen"
+  },
+  "dashboard": {
+    "welcome": "Willkommen zurück",
+    "overview": "Übersicht",
+    "recentBookings": "Letzte Buchungen",
+    "upcomingEvents": "Kommende Termine",
+    "stats": {
+      "totalBookings": "Buchungen gesamt",
+      "totalRevenue": "Gesamtumsatz",
+      "activeEvents": "Aktive Termine",
+      "conversionRate": "Conversion-Rate"
+    }
+  },
+  "analytics": {
+    "title": "Analytik",
+    "overview": "Übersicht",
+    "totalBookings": "Buchungen gesamt",
+    "totalRevenue": "Gesamtumsatz",
+    "avgBookingValue": "Durchschn. Buchungswert",
+    "conversionRate": "Conversion-Rate",
+    "bookingsByDay": "Buchungen pro Tag",
+    "bookingsByEventType": "Buchungen nach Termintyp",
+    "bookingsByStatus": "Buchungen nach Status",
+    "topPerformers": "Top-Performer",
+    "timeRange": {
+      "7d": "Letzte 7 Tage",
+      "30d": "Letzte 30 Tage",
+      "90d": "Letzte 90 Tage",
+      "1y": "Letztes Jahr"
+    },
+    "trends": {
+      "up": "Anstieg zur Vorperiode",
+      "down": "Rückgang zur Vorperiode"
+    }
+  },
+  "events": {
+    "title": "Termintypen",
+    "create": "Termin erstellen",
+    "edit": "Termin bearbeiten",
+    "delete": "Termin löschen",
+    "active": "Aktiv",
+    "inactive": "Inaktiv",
+    "duration": "Dauer",
+    "price": "Preis",
+    "description": "Beschreibung"
+  },
+  "design": {
+    "title": "Design-Einstellungen",
+    "colors": "Farben",
+    "fonts": "Schriftarten",
+    "layout": "Layout",
+    "preview": "Vorschau",
+    "primaryColor": "Primärfarbe",
+    "backgroundColor": "Hintergrundfarbe",
+    "textColor": "Textfarbe",
+    "fontFamily": "Schriftart",
+    "template": "Vorlage"
+  },
+  "integrations": {
+    "title": "Integrationen",
+    "google": "Google Calendar",
+    "outlook": "Outlook Calendar",
+    "googleAds": "Google Ads",
+    "microsoftClarity": "Microsoft Clarity",
+    "connect": "Verbinden",
+    "disconnect": "Trennen",
+    "connected": "Verbunden",
+    "notConnected": "Nicht verbunden"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "profile": "Profil",
+    "account": "Konto",
+    "billing": "Abrechnung",
+    "analytics": "Analytik",
+    "notifications": "Benachrichtigungen",
+    "save": "Änderungen speichern",
+    "cancel": "Abbrechen"
+  },
+  "booking": {
+    "title": "Termin buchen",
+    "selectDate": "Datum wählen",
+    "selectTime": "Uhrzeit wählen",
+    "yourInfo": "Ihre Informationen",
+    "name": "Name",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "notes": "Notizen",
+    "confirm": "Buchung bestätigen",
+    "cancel": "Abbrechen",
+    "success": "Buchung bestätigt!",
+    "error": "Buchung fehlgeschlagen. Bitte versuchen Sie es erneut."
+  },
+  "onboarding": {
+    "title": "Willkommen bei BookingSaaS",
+    "subtitle": "Richten Sie Ihr Konto ein",
+    "steps": {
+      "createEvent": "Ersten Termin erstellen",
+      "connectCalendar": "Kalender verbinden",
+      "customizeDesign": "Design anpassen",
+      "complete": "Einrichtung abschließen"
+    },
+    "createDefaultSetup": "Standard-Setup erstellen",
+    "skip": "Überspringen",
+    "next": "Weiter",
+    "previous": "Zurück",
+    "finish": "Fertig"
+  },
+  "common": {
+    "loading": "Lädt...",
+    "error": "Fehler",
+    "success": "Erfolg",
+    "submit": "Absenden",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "create": "Erstellen",
+    "search": "Suchen",
+    "filter": "Filtern",
+    "export": "Exportieren",
+    "import": "Importieren",
+    "yes": "Ja",
+    "no": "Nein",
+    "close": "Schließen",
+    "back": "Zurück",
+    "next": "Weiter",
+    "previous": "Zurück"
+  },
+  "errors": {
+    "unauthorized": "Nicht autorisiert. Bitte melden Sie sich an.",
+    "notFound": "Nicht gefunden",
+    "serverError": "Serverfehler. Bitte versuchen Sie es erneut.",
+    "validationError": "Bitte überprüfen Sie Ihre Eingabe.",
+    "networkError": "Netzwerkfehler. Bitte überprüfen Sie Ihre Verbindung."
+  }
+}

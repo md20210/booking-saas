@@ -1,0 +1,145 @@
+{
+  "nav": {
+    "dashboard": "Panel",
+    "events": "Etkinlikler",
+    "analytics": "Analitik",
+    "design": "Tasarım",
+    "integrations": "Entegrasyonlar",
+    "settings": "Ayarlar"
+  },
+  "dashboard": {
+    "welcome": "Tekrar hoş geldiniz",
+    "overview": "Genel Bakış",
+    "recentBookings": "Son rezervasyonlar",
+    "upcomingEvents": "Yaklaşan etkinlikler",
+    "stats": {
+      "totalBookings": "Toplam rezervasyon",
+      "totalRevenue": "Toplam gelir",
+      "activeEvents": "Aktif etkinlikler",
+      "conversionRate": "Dönüşüm oranı"
+    }
+  },
+  "analytics": {
+    "title": "Analitik",
+    "overview": "Genel Bakış",
+    "totalBookings": "Toplam rezervasyon",
+    "totalRevenue": "Toplam gelir",
+    "avgBookingValue": "Ortalama rezervasyon değeri",
+    "conversionRate": "Dönüşüm oranı",
+    "bookingsByDay": "Günlük rezervasyonlar",
+    "bookingsByEventType": "Etkinlik türüne göre rezervasyonlar",
+    "bookingsByStatus": "Duruma göre rezervasyonlar",
+    "topPerformers": "En iyi performanslar",
+    "timeRange": {
+      "7d": "Son 7 gün",
+      "30d": "Son 30 gün",
+      "90d": "Son 90 gün",
+      "1y": "Son yıl"
+    },
+    "trends": {
+      "up": "Önceki döneme göre artış",
+      "down": "Önceki döneme göre azalış"
+    }
+  },
+  "events": {
+    "title": "Etkinlik türleri",
+    "create": "Etkinlik oluştur",
+    "edit": "Etkinliği düzenle",
+    "delete": "Etkinliği sil",
+    "active": "Aktif",
+    "inactive": "İnaktif",
+    "duration": "Süre",
+    "price": "Fiyat",
+    "description": "Açıklama"
+  },
+  "design": {
+    "title": "Tasarım ayarları",
+    "colors": "Renkler",
+    "fonts": "Yazı tipleri",
+    "layout": "Düzen",
+    "preview": "Önizleme",
+    "primaryColor": "Ana renk",
+    "backgroundColor": "Arka plan rengi",
+    "textColor": "Metin rengi",
+    "fontFamily": "Yazı tipi ailesi",
+    "template": "Şablon"
+  },
+  "integrations": {
+    "title": "Entegrasyonlar",
+    "google": "Google Calendar",
+    "outlook": "Outlook Calendar",
+    "googleAds": "Google Ads",
+    "microsoftClarity": "Microsoft Clarity",
+    "connect": "Bağlan",
+    "disconnect": "Bağlantıyı kes",
+    "connected": "Bağlandı",
+    "notConnected": "Bağlı değil"
+  },
+  "settings": {
+    "title": "Ayarlar",
+    "profile": "Profil",
+    "account": "Hesap",
+    "billing": "Faturalandırma",
+    "analytics": "Analitik",
+    "notifications": "Bildirimler",
+    "save": "Değişiklikleri kaydet",
+    "cancel": "İptal"
+  },
+  "booking": {
+    "title": "Randevu al",
+    "selectDate": "Tarih seç",
+    "selectTime": "Saat seç",
+    "yourInfo": "Bilgileriniz",
+    "name": "İsim",
+    "email": "E-posta",
+    "phone": "Telefon",
+    "notes": "Notlar",
+    "confirm": "Rezervasyonu onayla",
+    "cancel": "İptal",
+    "success": "Rezervasyon onaylandı!",
+    "error": "Rezervasyon başarısız. Lütfen tekrar deneyin."
+  },
+  "onboarding": {
+    "title": "BookingSaaS'a hoş geldiniz",
+    "subtitle": "Hesabınızı kuralım",
+    "steps": {
+      "createEvent": "İlk etkinliğinizi oluşturun",
+      "connectCalendar": "Takviminizi bağlayın",
+      "customizeDesign": "Tasarımınızı özelleştirin",
+      "complete": "Kurulumu tamamlayın"
+    },
+    "createDefaultSetup": "Varsayılan kurulum oluştur",
+    "skip": "Şimdilik atla",
+    "next": "İleri",
+    "previous": "Geri",
+    "finish": "Bitir"
+  },
+  "common": {
+    "loading": "Yükleniyor...",
+    "error": "Hata",
+    "success": "Başarılı",
+    "submit": "Gönder",
+    "cancel": "İptal",
+    "save": "Kaydet",
+    "delete": "Sil",
+    "edit": "Düzenle",
+    "create": "Oluştur",
+    "search": "Ara",
+    "filter": "Filtrele",
+    "export": "Dışa aktar",
+    "import": "İçe aktar",
+    "yes": "Evet",
+    "no": "Hayır",
+    "close": "Kapat",
+    "back": "Geri",
+    "next": "İleri",
+    "previous": "Geri"
+  },
+  "errors": {
+    "unauthorized": "Yetkisiz. Lütfen giriş yapın.",
+    "notFound": "Bulunamadı",
+    "serverError": "Sunucu hatası. Lütfen tekrar deneyin.",
+    "validationError": "Lütfen girişinizi kontrol edin.",
+    "networkError": "Ağ hatası. Lütfen bağlantınızı kontrol edin."
+  }
+}

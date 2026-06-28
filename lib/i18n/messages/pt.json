@@ -1,0 +1,145 @@
+{
+  "nav": {
+    "dashboard": "Painel",
+    "events": "Eventos",
+    "analytics": "Análise",
+    "design": "Design",
+    "integrations": "Integrações",
+    "settings": "Configurações"
+  },
+  "dashboard": {
+    "welcome": "Bem-vindo de volta",
+    "overview": "Visão geral",
+    "recentBookings": "Reservas recentes",
+    "upcomingEvents": "Próximos eventos",
+    "stats": {
+      "totalBookings": "Total de reservas",
+      "totalRevenue": "Receita total",
+      "activeEvents": "Eventos ativos",
+      "conversionRate": "Taxa de conversão"
+    }
+  },
+  "analytics": {
+    "title": "Análise",
+    "overview": "Visão geral",
+    "totalBookings": "Total de reservas",
+    "totalRevenue": "Receita total",
+    "avgBookingValue": "Valor médio de reserva",
+    "conversionRate": "Taxa de conversão",
+    "bookingsByDay": "Reservas por dia",
+    "bookingsByEventType": "Reservas por tipo de evento",
+    "bookingsByStatus": "Reservas por status",
+    "topPerformers": "Melhores desempenhos",
+    "timeRange": {
+      "7d": "Últimos 7 dias",
+      "30d": "Últimos 30 dias",
+      "90d": "Últimos 90 dias",
+      "1y": "Último ano"
+    },
+    "trends": {
+      "up": "Aumento em relação ao período anterior",
+      "down": "Queda em relação ao período anterior"
+    }
+  },
+  "events": {
+    "title": "Tipos de eventos",
+    "create": "Criar evento",
+    "edit": "Editar evento",
+    "delete": "Excluir evento",
+    "active": "Ativo",
+    "inactive": "Inativo",
+    "duration": "Duração",
+    "price": "Preço",
+    "description": "Descrição"
+  },
+  "design": {
+    "title": "Configurações de design",
+    "colors": "Cores",
+    "fonts": "Fontes",
+    "layout": "Layout",
+    "preview": "Visualização",
+    "primaryColor": "Cor primária",
+    "backgroundColor": "Cor de fundo",
+    "textColor": "Cor do texto",
+    "fontFamily": "Família de fonte",
+    "template": "Modelo"
+  },
+  "integrations": {
+    "title": "Integrações",
+    "google": "Google Calendar",
+    "outlook": "Outlook Calendar",
+    "googleAds": "Google Ads",
+    "microsoftClarity": "Microsoft Clarity",
+    "connect": "Conectar",
+    "disconnect": "Desconectar",
+    "connected": "Conectado",
+    "notConnected": "Não conectado"
+  },
+  "settings": {
+    "title": "Configurações",
+    "profile": "Perfil",
+    "account": "Conta",
+    "billing": "Faturamento",
+    "analytics": "Análise",
+    "notifications": "Notificações",
+    "save": "Salvar alterações",
+    "cancel": "Cancelar"
+  },
+  "booking": {
+    "title": "Reservar um compromisso",
+    "selectDate": "Selecionar data",
+    "selectTime": "Selecionar horário",
+    "yourInfo": "Suas informações",
+    "name": "Nome",
+    "email": "E-mail",
+    "phone": "Telefone",
+    "notes": "Notas",
+    "confirm": "Confirmar reserva",
+    "cancel": "Cancelar",
+    "success": "Reserva confirmada!",
+    "error": "Falha na reserva. Tente novamente."
+  },
+  "onboarding": {
+    "title": "Bem-vindo ao BookingSaaS",
+    "subtitle": "Vamos configurar sua conta",
+    "steps": {
+      "createEvent": "Criar seu primeiro evento",
+      "connectCalendar": "Conectar seu calendário",
+      "customizeDesign": "Personalizar seu design",
+      "complete": "Concluir configuração"
+    },
+    "createDefaultSetup": "Criar configuração padrão",
+    "skip": "Pular por enquanto",
+    "next": "Próximo",
+    "previous": "Anterior",
+    "finish": "Concluir"
+  },
+  "common": {
+    "loading": "Carregando...",
+    "error": "Erro",
+    "success": "Sucesso",
+    "submit": "Enviar",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "create": "Criar",
+    "search": "Pesquisar",
+    "filter": "Filtrar",
+    "export": "Exportar",
+    "import": "Importar",
+    "yes": "Sim",
+    "no": "Não",
+    "close": "Fechar",
+    "back": "Voltar",
+    "next": "Próximo",
+    "previous": "Anterior"
+  },
+  "errors": {
+    "unauthorized": "Não autorizado. Faça login.",
+    "notFound": "Não encontrado",
+    "serverError": "Erro do servidor. Tente novamente.",
+    "validationError": "Verifique suas informações.",
+    "networkError": "Erro de rede. Verifique sua conexão."
+  }
+}

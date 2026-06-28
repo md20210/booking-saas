@@ -1,0 +1,145 @@
+{
+  "nav": {
+    "dashboard": "Tableau de bord",
+    "events": "Événements",
+    "analytics": "Analytique",
+    "design": "Design",
+    "integrations": "Intégrations",
+    "settings": "Paramètres"
+  },
+  "dashboard": {
+    "welcome": "Bon retour",
+    "overview": "Aperçu",
+    "recentBookings": "Réservations récentes",
+    "upcomingEvents": "Événements à venir",
+    "stats": {
+      "totalBookings": "Réservations totales",
+      "totalRevenue": "Revenu total",
+      "activeEvents": "Événements actifs",
+      "conversionRate": "Taux de conversion"
+    }
+  },
+  "analytics": {
+    "title": "Analytique",
+    "overview": "Aperçu",
+    "totalBookings": "Réservations totales",
+    "totalRevenue": "Revenu total",
+    "avgBookingValue": "Valeur moyenne de réservation",
+    "conversionRate": "Taux de conversion",
+    "bookingsByDay": "Réservations par jour",
+    "bookingsByEventType": "Réservations par type d'événement",
+    "bookingsByStatus": "Réservations par statut",
+    "topPerformers": "Meilleurs résultats",
+    "timeRange": {
+      "7d": "7 derniers jours",
+      "30d": "30 derniers jours",
+      "90d": "90 derniers jours",
+      "1y": "Dernière année"
+    },
+    "trends": {
+      "up": "En hausse par rapport à la période précédente",
+      "down": "En baisse par rapport à la période précédente"
+    }
+  },
+  "events": {
+    "title": "Types d'événements",
+    "create": "Créer un événement",
+    "edit": "Modifier l'événement",
+    "delete": "Supprimer l'événement",
+    "active": "Actif",
+    "inactive": "Inactif",
+    "duration": "Durée",
+    "price": "Prix",
+    "description": "Description"
+  },
+  "design": {
+    "title": "Paramètres de design",
+    "colors": "Couleurs",
+    "fonts": "Polices",
+    "layout": "Mise en page",
+    "preview": "Aperçu",
+    "primaryColor": "Couleur primaire",
+    "backgroundColor": "Couleur de fond",
+    "textColor": "Couleur du texte",
+    "fontFamily": "Famille de police",
+    "template": "Modèle"
+  },
+  "integrations": {
+    "title": "Intégrations",
+    "google": "Google Calendar",
+    "outlook": "Outlook Calendar",
+    "googleAds": "Google Ads",
+    "microsoftClarity": "Microsoft Clarity",
+    "connect": "Connecter",
+    "disconnect": "Déconnecter",
+    "connected": "Connecté",
+    "notConnected": "Non connecté"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "profile": "Profil",
+    "account": "Compte",
+    "billing": "Facturation",
+    "analytics": "Analytique",
+    "notifications": "Notifications",
+    "save": "Enregistrer les modifications",
+    "cancel": "Annuler"
+  },
+  "booking": {
+    "title": "Réserver un rendez-vous",
+    "selectDate": "Sélectionner une date",
+    "selectTime": "Sélectionner une heure",
+    "yourInfo": "Vos informations",
+    "name": "Nom",
+    "email": "E-mail",
+    "phone": "Téléphone",
+    "notes": "Notes",
+    "confirm": "Confirmer la réservation",
+    "cancel": "Annuler",
+    "success": "Réservation confirmée !",
+    "error": "La réservation a échoué. Veuillez réessayer."
+  },
+  "onboarding": {
+    "title": "Bienvenue sur BookingSaaS",
+    "subtitle": "Configurons votre compte",
+    "steps": {
+      "createEvent": "Créer votre premier événement",
+      "connectCalendar": "Connecter votre calendrier",
+      "customizeDesign": "Personnaliser votre design",
+      "complete": "Terminer la configuration"
+    },
+    "createDefaultSetup": "Créer une configuration par défaut",
+    "skip": "Ignorer pour l'instant",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "finish": "Terminer"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "submit": "Soumettre",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "create": "Créer",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "export": "Exporter",
+    "import": "Importer",
+    "yes": "Oui",
+    "no": "Non",
+    "close": "Fermer",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent"
+  },
+  "errors": {
+    "unauthorized": "Non autorisé. Veuillez vous connecter.",
+    "notFound": "Non trouvé",
+    "serverError": "Erreur du serveur. Veuillez réessayer.",
+    "validationError": "Veuillez vérifier votre saisie.",
+    "networkError": "Erreur réseau. Veuillez vérifier votre connexion."
+  }
+}

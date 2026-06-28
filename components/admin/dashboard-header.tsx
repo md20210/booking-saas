@@ -12,6 +12,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { User, Settings, Key, LogOut } from "lucide-react"
 import Link from "next/link"
+import { LocaleSwitcher } from "@/components/locale-switcher"
 
 export function DashboardHeader() {
   const { data: session } = useSession()
@@ -37,6 +38,7 @@ export function DashboardHeader() {
       </div>
 
       <div className="flex items-center gap-4">
+        <LocaleSwitcher />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="relative h-10 w-10 rounded-full">

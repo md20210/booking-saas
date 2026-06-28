@@ -1,0 +1,145 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "events": "Evenementen",
+    "analytics": "Analyses",
+    "design": "Ontwerp",
+    "integrations": "Integraties",
+    "settings": "Instellingen"
+  },
+  "dashboard": {
+    "welcome": "Welkom terug",
+    "overview": "Overzicht",
+    "recentBookings": "Recente boekingen",
+    "upcomingEvents": "Aankomende evenementen",
+    "stats": {
+      "totalBookings": "Totaal aantal boekingen",
+      "totalRevenue": "Totale omzet",
+      "activeEvents": "Actieve evenementen",
+      "conversionRate": "Conversiepercentage"
+    }
+  },
+  "analytics": {
+    "title": "Analyses",
+    "overview": "Overzicht",
+    "totalBookings": "Totaal aantal boekingen",
+    "totalRevenue": "Totale omzet",
+    "avgBookingValue": "Gemiddelde boekingswaarde",
+    "conversionRate": "Conversiepercentage",
+    "bookingsByDay": "Boekingen per dag",
+    "bookingsByEventType": "Boekingen per type evenement",
+    "bookingsByStatus": "Boekingen per status",
+    "topPerformers": "Beste presteerders",
+    "timeRange": {
+      "7d": "Laatste 7 dagen",
+      "30d": "Laatste 30 dagen",
+      "90d": "Laatste 90 dagen",
+      "1y": "Laatste jaar"
+    },
+    "trends": {
+      "up": "Stijging ten opzichte van vorige periode",
+      "down": "Daling ten opzichte van vorige periode"
+    }
+  },
+  "events": {
+    "title": "Evenementtypen",
+    "create": "Evenement aanmaken",
+    "edit": "Evenement bewerken",
+    "delete": "Evenement verwijderen",
+    "active": "Actief",
+    "inactive": "Inactief",
+    "duration": "Duur",
+    "price": "Prijs",
+    "description": "Beschrijving"
+  },
+  "design": {
+    "title": "Ontwerp instellingen",
+    "colors": "Kleuren",
+    "fonts": "Lettertypen",
+    "layout": "Layout",
+    "preview": "Voorbeeld",
+    "primaryColor": "Primaire kleur",
+    "backgroundColor": "Achtergrondkleur",
+    "textColor": "Tekstkleur",
+    "fontFamily": "Lettertypefamilie",
+    "template": "Sjabloon"
+  },
+  "integrations": {
+    "title": "Integraties",
+    "google": "Google Calendar",
+    "outlook": "Outlook Calendar",
+    "googleAds": "Google Ads",
+    "microsoftClarity": "Microsoft Clarity",
+    "connect": "Verbinden",
+    "disconnect": "Verbinding verbreken",
+    "connected": "Verbonden",
+    "notConnected": "Niet verbonden"
+  },
+  "settings": {
+    "title": "Instellingen",
+    "profile": "Profiel",
+    "account": "Account",
+    "billing": "Facturering",
+    "analytics": "Analyses",
+    "notifications": "Meldingen",
+    "save": "Wijzigingen opslaan",
+    "cancel": "Annuleren"
+  },
+  "booking": {
+    "title": "Afspraak maken",
+    "selectDate": "Selecteer een datum",
+    "selectTime": "Selecteer een tijd",
+    "yourInfo": "Uw informatie",
+    "name": "Naam",
+    "email": "E-mail",
+    "phone": "Telefoon",
+    "notes": "Opmerkingen",
+    "confirm": "Boeking bevestigen",
+    "cancel": "Annuleren",
+    "success": "Boeking bevestigd!",
+    "error": "Boeking mislukt. Probeer het opnieuw."
+  },
+  "onboarding": {
+    "title": "Welkom bij BookingSaaS",
+    "subtitle": "Laten we uw account instellen",
+    "steps": {
+      "createEvent": "Maak uw eerste evenement",
+      "connectCalendar": "Verbind uw agenda",
+      "customizeDesign": "Pas uw ontwerp aan",
+      "complete": "Voltooi de installatie"
+    },
+    "createDefaultSetup": "Standaard configuratie aanmaken",
+    "skip": "Overslaan",
+    "next": "Volgende",
+    "previous": "Vorige",
+    "finish": "Voltooien"
+  },
+  "common": {
+    "loading": "Laden...",
+    "error": "Fout",
+    "success": "Succes",
+    "submit": "Verzenden",
+    "cancel": "Annuleren",
+    "save": "Opslaan",
+    "delete": "Verwijderen",
+    "edit": "Bewerken",
+    "create": "Aanmaken",
+    "search": "Zoeken",
+    "filter": "Filteren",
+    "export": "Exporteren",
+    "import": "Importeren",
+    "yes": "Ja",
+    "no": "Nee",
+    "close": "Sluiten",
+    "back": "Terug",
+    "next": "Volgende",
+    "previous": "Vorige"
+  },
+  "errors": {
+    "unauthorized": "Niet geautoriseerd. Log in.",
+    "notFound": "Niet gevonden",
+    "serverError": "Serverfout. Probeer het opnieuw.",
+    "validationError": "Controleer uw invoer.",
+    "networkError": "Netwerkfout. Controleer uw verbinding."
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "events": "Events",
+    "analytics": "Analytics",
+    "design": "Design",
+    "integrations": "Integrations",
+    "settings": "Settings"
+  },
+  "dashboard": {
+    "welcome": "Welcome back",
+    "overview": "Overview",
+    "recentBookings": "Recent Bookings",
+    "upcomingEvents": "Upcoming Events",
+    "stats": {
+      "totalBookings": "Total Bookings",
+      "totalRevenue": "Total Revenue",
+      "activeEvents": "Active Events",
+      "conversionRate": "Conversion Rate"
+    }
+  },
+  "analytics": {
+    "title": "Analytics",
+    "overview": "Overview",
+    "totalBookings": "Total Bookings",
+    "totalRevenue": "Total Revenue",
+    "avgBookingValue": "Avg. Booking Value",
+    "conversionRate": "Conversion Rate",
+    "bookingsByDay": "Bookings by Day",
+    "bookingsByEventType": "Bookings by Event Type",
+    "bookingsByStatus": "Bookings by Status",
+    "topPerformers": "Top Performers",
+    "timeRange": {
+      "7d": "Last 7 days",
+      "30d": "Last 30 days",
+      "90d": "Last 90 days",
+      "1y": "Last year"
+    },
+    "trends": {
+      "up": "Up from previous period",
+      "down": "Down from previous period"
+    }
+  },
+  "events": {
+    "title": "Event Types",
+    "create": "Create Event",
+    "edit": "Edit Event",
+    "delete": "Delete Event",
+    "active": "Active",
+    "inactive": "Inactive",
+    "duration": "Duration",
+    "price": "Price",
+    "description": "Description"
+  },
+  "design": {
+    "title": "Design Settings",
+    "colors": "Colors",
+    "fonts": "Fonts",
+    "layout": "Layout",
+    "preview": "Preview",
+    "primaryColor": "Primary Color",
+    "backgroundColor": "Background Color",
+    "textColor": "Text Color",
+    "fontFamily": "Font Family",
+    "template": "Template"
+  },
+  "integrations": {
+    "title": "Integrations",
+    "google": "Google Calendar",
+    "outlook": "Outlook Calendar",
+    "googleAds": "Google Ads",
+    "microsoftClarity": "Microsoft Clarity",
+    "connect": "Connect",
+    "disconnect": "Disconnect",
+    "connected": "Connected",
+    "notConnected": "Not Connected"
+  },
+  "settings": {
+    "title": "Settings",
+    "profile": "Profile",
+    "account": "Account",
+    "billing": "Billing",
+    "analytics": "Analytics",
+    "notifications": "Notifications",
+    "save": "Save Changes",
+    "cancel": "Cancel"
+  },
+  "booking": {
+    "title": "Book an Appointment",
+    "selectDate": "Select a Date",
+    "selectTime": "Select a Time",
+    "yourInfo": "Your Information",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "notes": "Notes",
+    "confirm": "Confirm Booking",
+    "cancel": "Cancel",
+    "success": "Booking confirmed!",
+    "error": "Booking failed. Please try again."
+  },
+  "onboarding": {
+    "title": "Welcome to BookingSaaS",
+    "subtitle": "Let's set up your account",
+    "steps": {
+      "createEvent": "Create your first event",
+      "connectCalendar": "Connect your calendar",
+      "customizeDesign": "Customize your design",
+      "complete": "Complete setup"
+    },
+    "createDefaultSetup": "Create Default Setup",
+    "skip": "Skip for now",
+    "next": "Next",
+    "previous": "Previous",
+    "finish": "Finish"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "search": "Search",
+    "filter": "Filter",
+    "export": "Export",
+    "import": "Import",
+    "yes": "Yes",
+    "no": "No",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous"
+  },
+  "errors": {
+    "unauthorized": "Unauthorized. Please log in.",
+    "notFound": "Not found",
+    "serverError": "Server error. Please try again.",
+    "validationError": "Please check your input.",
+    "networkError": "Network error. Please check your connection."
+  }
+}

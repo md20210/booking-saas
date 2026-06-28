@@ -1,0 +1,145 @@
+{
+  "nav": {
+    "dashboard": "ダッシュボード",
+    "events": "イベント",
+    "analytics": "分析",
+    "design": "デザイン",
+    "integrations": "統合",
+    "settings": "設定"
+  },
+  "dashboard": {
+    "welcome": "おかえりなさい",
+    "overview": "概要",
+    "recentBookings": "最近の予約",
+    "upcomingEvents": "今後のイベント",
+    "stats": {
+      "totalBookings": "総予約数",
+      "totalRevenue": "総収入",
+      "activeEvents": "アクティブなイベント",
+      "conversionRate": "コンバージョン率"
+    }
+  },
+  "analytics": {
+    "title": "分析",
+    "overview": "概要",
+    "totalBookings": "総予約数",
+    "totalRevenue": "総収入",
+    "avgBookingValue": "平均予約額",
+    "conversionRate": "コンバージョン率",
+    "bookingsByDay": "日別予約",
+    "bookingsByEventType": "イベント種類別予約",
+    "bookingsByStatus": "ステータス別予約",
+    "topPerformers": "トップパフォーマー",
+    "timeRange": {
+      "7d": "過去7日間",
+      "30d": "過去30日間",
+      "90d": "過去90日間",
+      "1y": "過去1年間"
+    },
+    "trends": {
+      "up": "前期比増加",
+      "down": "前期比減少"
+    }
+  },
+  "events": {
+    "title": "イベントタイプ",
+    "create": "イベント作成",
+    "edit": "イベント編集",
+    "delete": "イベント削除",
+    "active": "アクティブ",
+    "inactive": "非アクティブ",
+    "duration": "期間",
+    "price": "価格",
+    "description": "説明"
+  },
+  "design": {
+    "title": "デザイン設定",
+    "colors": "カラー",
+    "fonts": "フォント",
+    "layout": "レイアウト",
+    "preview": "プレビュー",
+    "primaryColor": "プライマリカラー",
+    "backgroundColor": "背景色",
+    "textColor": "テキストカラー",
+    "fontFamily": "フォントファミリー",
+    "template": "テンプレート"
+  },
+  "integrations": {
+    "title": "統合",
+    "google": "Google Calendar",
+    "outlook": "Outlook Calendar",
+    "googleAds": "Google Ads",
+    "microsoftClarity": "Microsoft Clarity",
+    "connect": "接続",
+    "disconnect": "切断",
+    "connected": "接続済み",
+    "notConnected": "未接続"
+  },
+  "settings": {
+    "title": "設定",
+    "profile": "プロフィール",
+    "account": "アカウント",
+    "billing": "請求",
+    "analytics": "分析",
+    "notifications": "通知",
+    "save": "変更を保存",
+    "cancel": "キャンセル"
+  },
+  "booking": {
+    "title": "予約する",
+    "selectDate": "日付を選択",
+    "selectTime": "時間を選択",
+    "yourInfo": "あなたの情報",
+    "name": "名前",
+    "email": "メールアドレス",
+    "phone": "電話番号",
+    "notes": "メモ",
+    "confirm": "予約を確認",
+    "cancel": "キャンセル",
+    "success": "予約が確定しました！",
+    "error": "予約に失敗しました。もう一度お試しください。"
+  },
+  "onboarding": {
+    "title": "BookingSaaSへようこそ",
+    "subtitle": "アカウントを設定しましょう",
+    "steps": {
+      "createEvent": "最初のイベントを作成",
+      "connectCalendar": "カレンダーを接続",
+      "customizeDesign": "デザインをカスタマイズ",
+      "complete": "設定を完了"
+    },
+    "createDefaultSetup": "デフォルト設定を作成",
+    "skip": "スキップ",
+    "next": "次へ",
+    "previous": "戻る",
+    "finish": "完了"
+  },
+  "common": {
+    "loading": "読み込み中...",
+    "error": "エラー",
+    "success": "成功",
+    "submit": "送信",
+    "cancel": "キャンセル",
+    "save": "保存",
+    "delete": "削除",
+    "edit": "編集",
+    "create": "作成",
+    "search": "検索",
+    "filter": "フィルター",
+    "export": "エクスポート",
+    "import": "インポート",
+    "yes": "はい",
+    "no": "いいえ",
+    "close": "閉じる",
+    "back": "戻る",
+    "next": "次へ",
+    "previous": "前へ"
+  },
+  "errors": {
+    "unauthorized": "認証されていません。ログインしてください。",
+    "notFound": "見つかりません",
+    "serverError": "サーバーエラー。もう一度お試しください。",
+    "validationError": "入力内容を確認してください。",
+    "networkError": "ネットワークエラー。接続を確認してください。"
+  }
+}
