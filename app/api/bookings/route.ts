@@ -233,7 +233,6 @@ Booking ID: ${booking.id}`,
         await prisma.trackingData.create({
           data: {
             bookingId: booking.id,
-            eventTypeId: data.eventTypeId,
             gclid: data.gclid,
             gbraid: data.gbraid,
             wbraid: data.wbraid,
