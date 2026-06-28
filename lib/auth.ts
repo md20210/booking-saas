@@ -1,6 +1,5 @@
 import { NextAuthOptions } from 'next-auth'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
-import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { prisma } from './db'
 import { compare } from 'bcryptjs'
@@ -9,11 +8,6 @@ export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma) as any,
 
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }),
-
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
@@ -54,32 +48,10 @@ export const authOptions: NextAuthOptions = {
   },
 
   callbacks: {
-    async jwt({ token, user, account }) {
+    async jwt({ token, user }) {
       if (user) {
         token.id = user.id
       }
-
-      // Store Google refresh token for Calendar API
-      if (account?.provider === 'google' && account.refresh_token) {
-        // Store refresh token in database for later use
-        await prisma.googleIntegration.upsert({
-          where: { userId: user.id },
-          create: {
-            userId: user.id,
-            accessToken: account.access_token!,
-            refreshToken: account.refresh_token,
-            expiresAt: new Date(account.expires_at! * 1000),
-            scope: account.scope!,
-          },
-          update: {
-            accessToken: account.access_token!,
-            refreshToken: account.refresh_token,
-            expiresAt: new Date(account.expires_at! * 1000),
-            scope: account.scope!,
-          },
-        })
-      }
-
       return token
     },
 
