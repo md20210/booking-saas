@@ -32,6 +32,7 @@ model User {
   trackingSettings TrackingSettings?
   apiKeys       ApiKey[]
   apiCredentials ApiCredentials?
+  auditLogs     AuditLog[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -377,4 +378,28 @@ model ApiCredentials {
   updatedAt DateTime @updatedAt
 
   @@index([userId])
+}
+
+// ============================================
+// AUDIT LOGS (Activity Tracking)
+// ============================================
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  action    String   // "user.login", "booking.created", "settings.updated", etc.
+  entity    String?  // "Booking", "EventType", "User", etc.
+  entityId  String?  // ID of the affected entity
+
+  details   Json?    // Additional context
+  ipAddress String?
+  userAgent String?
+
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([action])
+  @@index([createdAt])
 }
