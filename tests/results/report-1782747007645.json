@@ -1,0 +1,29 @@
+{
+  "timestamp": "2026-06-29T15:30:07.645Z",
+  "baseUrl": "https://booking-saas-production-c352.up.railway.app",
+  "testUser": {
+    "email": "test-1782746969429@example.com",
+    "name": "Test User E2E"
+  },
+  "summary": {
+    "total": 2,
+    "success": 1,
+    "failed": 1,
+    "duration": 38216
+  },
+  "results": [
+    {
+      "step": "Step 1: Register New User",
+      "status": "success",
+      "duration": 35144,
+      "screenshot": "tests/results/screenshots/step-1-step-1:-register-new-user.png"
+    },
+    {
+      "step": "Step 2: Configure API Credentials",
+      "status": "failed",
+      "duration": 2306,
+      "screenshot": "tests/results/screenshots/error-2-step-2:-configure-api-credentials.png",
+      "error": "Settings page not accessible"
+    }
+  ]
+}

@@ -107,43 +107,105 @@ class E2ETestRunner {
       await this.page.goto(`${BASE_URL}/register`, { waitUntil: 'networkidle2' })
 
       // Fill registration form
+      await this.page.waitForSelector('input[name="name"]', { timeout: 5000 })
       await this.page.type('input[name="name"]', TEST_USER.name)
       await this.page.type('input[name="email"]', TEST_USER.email)
       await this.page.type('input[name="password"]', TEST_USER.password)
 
-      // Accept terms
+      // Accept terms - wait for checkbox first
+      await this.page.waitForSelector('input[type="checkbox"]#terms', { timeout: 5000 })
       await this.page.click('input[type="checkbox"]#terms')
 
       // Submit
       await this.page.click('button[type="submit"]')
 
-      // Wait for redirect to dashboard or login
-      await this.page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 30000 })
-        .catch(() => console.log('   ⚠️  No navigation after registration'))
+      // Wait for registration to complete - give it more time
+      await new Promise(resolve => setTimeout(resolve, 3000))
 
-      const currentUrl = this.page.url()
-      console.log(`   📍 Redirected to: ${currentUrl}`)
+      // Try to wait for navigation
+      await this.page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 10000 })
+        .catch(() => console.log('   ⚠️  No navigation detected after submit'))
 
-      // Check if we're on dashboard or need to login
-      if (currentUrl.includes('/login') || currentUrl.includes('/signin')) {
-        console.log('   ℹ️  Need to login manually')
-        await this.page.type('input[type="email"]', TEST_USER.email)
-        await this.page.type('input[type="password"]', TEST_USER.password)
+      let currentUrl = this.page.url()
+      console.log(`   📍 After submit: ${currentUrl}`)
+
+      // Check if there's an error message on the registration page
+      const hasError = await this.page.evaluate(() => {
+        return document.body.textContent?.toLowerCase().includes('error') ||
+               document.body.textContent?.toLowerCase().includes('already exists')
+      })
+
+      if (hasError && currentUrl.includes('/register')) {
+        const errorText = await this.page.evaluate(() => document.body.textContent?.substring(0, 300))
+        console.log(`   ⚠️  Registration error detected: ${errorText}`)
+        // Continue anyway, might be duplicate user
+      }
+
+      // If still on register page or redirected to signin, navigate to login
+      if (currentUrl.includes('/register') || currentUrl.includes('/signin')) {
+        console.log('   ℹ️  Navigating to login page...')
+        // Wait a bit more for registration to complete in backend
+        await new Promise(resolve => setTimeout(resolve, 2000))
+        // Use the NextAuth signin page which is more reliable
+        await this.page.goto(`${BASE_URL}/api/auth/signin`, { waitUntil: 'networkidle2' })
+        currentUrl = this.page.url()
+      }
+
+      // Check if we need to login
+      if (!currentUrl.includes('/dashboard')) {
+        console.log('   ℹ️  Attempting login with credentials...')
+        console.log(`   📧 Email: ${TEST_USER.email}`)
+
+        // Wait for login form - use more flexible selectors
+        await this.page.waitForSelector('input[name="email"], input[type="email"]', { timeout: 5000 })
+
+        // Clear any existing input first
+        await this.page.evaluate(() => {
+          const emailInput = document.querySelector('input[name="email"], input[type="email"]') as HTMLInputElement
+          const passwordInput = document.querySelector('input[name="password"], input[type="password"]') as HTMLInputElement
+          if (emailInput) emailInput.value = ''
+          if (passwordInput) passwordInput.value = ''
+        })
+
+        // Type credentials with more flexible selectors
+        await this.page.type('input[name="email"], input[type="email"]', TEST_USER.email, { delay: 50 })
+        await this.page.type('input[name="password"], input[type="password"]', TEST_USER.password, { delay: 50 })
+
+        // Submit form
         await this.page.click('button[type="submit"]')
-        await this.page.waitForNavigation({ waitUntil: 'networkidle2' })
+
+        // Wait for navigation to dashboard
+        await this.page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 30000 })
+          .catch(() => console.log('   ⚠️  No navigation after login'))
+
+        // Give it a moment to settle
+        await new Promise(resolve => setTimeout(resolve, 2000))
       }
 
       // Verify we're logged in
+      currentUrl = this.page.url()
+      console.log(`   📍 Final URL: ${currentUrl}`)
+
+      // Check for login errors
+      if (currentUrl.includes('error=')) {
+        const bodyText = await this.page.evaluate(() => document.body.textContent?.substring(0, 300))
+        console.log(`   ❌ Login error detected: ${bodyText}`)
+        throw new Error(`Login failed with credentials. This likely means registration didn't complete successfully. Error: ${bodyText}`)
+      }
+
       const isDashboard = await this.page.evaluate(() => {
-        return document.body.textContent?.includes('Dashboard') ||
-               document.body.textContent?.includes('Welcome')
+        return window.location.href.includes('/dashboard') ||
+               document.body.textContent?.includes('Dashboard') ||
+               document.body.textContent?.includes('Welcome back')
       })
 
       if (!isDashboard) {
-        throw new Error('Registration failed - not on dashboard')
+        const bodyText = await this.page.evaluate(() => document.body.textContent?.substring(0, 300))
+        console.log(`   ⚠️  Not on dashboard. Body content: ${bodyText}`)
+        throw new Error('Registration/Login failed - not on dashboard')
       }
 
-      console.log('   ✓ User registered and logged in')
+      console.log('   ✓ User registered and logged in successfully')
     })
   }
 

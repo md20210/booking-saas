@@ -1,0 +1,23 @@
+{
+  "timestamp": "2026-06-29T15:35:10.176Z",
+  "baseUrl": "https://booking-saas-production-c352.up.railway.app",
+  "testUser": {
+    "email": "test-1782747284568@example.com",
+    "name": "Test User E2E"
+  },
+  "summary": {
+    "total": 1,
+    "success": 0,
+    "failed": 1,
+    "duration": 25608
+  },
+  "results": [
+    {
+      "step": "Step 1: Register New User",
+      "status": "failed",
+      "duration": 25147,
+      "screenshot": "tests/results/screenshots/error-1-step-1:-register-new-user.png",
+      "error": "Login failed with credentials. This likely means registration didn't complete successfully. Error: Sign in failed. Check the details you provided are correct.EmailPasswordSign in with Credentials"
+    }
+  ]
+}
