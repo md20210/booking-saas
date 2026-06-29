@@ -38,6 +38,7 @@ export async function POST(request: NextRequest) {
     // Check if user already exists
     const existingUser = await prisma.user.findUnique({
       where: { email },
+      select: { id: true, email: true } // Only select fields that exist in Railway DB
     })
 
     if (existingUser) {
