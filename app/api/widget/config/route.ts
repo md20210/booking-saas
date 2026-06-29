@@ -3,40 +3,62 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/db'
 
+// Helper: Get user from API key or session
+async function getUserFromRequest(request: NextRequest) {
+  // Try API key first (for cross-domain access)
+  const apiKey = request.headers.get('x-api-key')
+
+  if (apiKey) {
+    const key = await prisma.apiKey.findUnique({
+      where: { key: apiKey, active: true },
+      include: { user: true }
+    })
+
+    if (key) {
+      // Update last used
+      await prisma.apiKey.update({
+        where: { id: key.id },
+        data: { lastUsedAt: new Date() }
+      })
+      return key.user
+    }
+  }
+
+  // Fallback to session (same-domain)
+  const session = await getServerSession(authOptions)
+  if (session?.user?.email) {
+    return await prisma.user.findUnique({
+      where: { email: session.user.email }
+    })
+  }
+
+  return null
+}
+
 // GET /api/widget/config - Load widget configuration
 export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
+    const user = await getUserFromRequest(request)
 
-    if (!session?.user?.email) {
+    if (!user) {
       return NextResponse.json(
-        { error: 'Unauthorized' },
+        { error: 'Unauthorized - provide API key or login' },
         { status: 401 }
       )
     }
 
-    const user = await prisma.user.findUnique({
-      where: { email: session.user.email },
-      include: {
-        designSettings: true,
-      }
+    const designSettings = await prisma.designSettings.findUnique({
+      where: { userId: user.id }
     })
-
-    if (!user) {
-      return NextResponse.json(
-        { error: 'User not found' },
-        { status: 404 }
-      )
-    }
 
     // Return widget configuration
     const config = {
-      primaryColor: user.designSettings?.primaryColor || '#667eea',
-      backgroundColor: user.designSettings?.backgroundColor || '#ffffff',
-      textColor: user.designSettings?.textColor || '#1f2937',
-      fontFamily: user.designSettings?.fontFamily || 'Inter',
-      showBranding: user.designSettings?.showBranding ?? true,
-      logoUrl: user.designSettings?.logoUrl || null,
+      primaryColor: designSettings?.primaryColor || '#667eea',
+      backgroundColor: designSettings?.backgroundColor || '#ffffff',
+      textColor: designSettings?.textColor || '#1f2937',
+      fontFamily: designSettings?.fontFamily || 'Inter',
+      showBranding: designSettings?.showBranding ?? true,
+      logoUrl: designSettings?.logoUrl || null,
     }
 
     return NextResponse.json(config, { status: 200 })
@@ -52,11 +74,11 @@ export async function GET(request: NextRequest) {
 // POST /api/widget/config - Save widget configuration
 export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
+    const user = await getUserFromRequest(request)
 
-    if (!session?.user?.email) {
+    if (!user) {
       return NextResponse.json(
-        { error: 'Unauthorized' },
+        { error: 'Unauthorized - provide API key or login' },
         { status: 401 }
       )
     }
@@ -70,17 +92,6 @@ export async function POST(request: NextRequest) {
       showBranding,
       logoUrl
     } = body
-
-    const user = await prisma.user.findUnique({
-      where: { email: session.user.email },
-    })
-
-    if (!user) {
-      return NextResponse.json(
-        { error: 'User not found' },
-        { status: 404 }
-      )
-    }
 
     // Upsert design settings
     const designSettings = await prisma.designSettings.upsert({

@@ -1,0 +1,52 @@
+{
+  "timestamp": "2026-06-29T15:52:35.563Z",
+  "baseUrl": "https://booking-saas-production-c352.up.railway.app",
+  "testUser": {
+    "email": "test-1782748334191@example.com",
+    "name": "Test User E2E"
+  },
+  "summary": {
+    "total": 6,
+    "success": 6,
+    "failed": 0,
+    "duration": 21372
+  },
+  "results": [
+    {
+      "step": "Step 1: Register New User",
+      "status": "success",
+      "duration": 14828,
+      "screenshot": "tests/results/screenshots/step-1-step-1:-register-new-user.png"
+    },
+    {
+      "step": "Step 2: Configure API Credentials",
+      "status": "success",
+      "duration": 1190,
+      "screenshot": "tests/results/screenshots/step-2-step-2:-configure-api-credentials.png"
+    },
+    {
+      "step": "Step 3: Create Event Type",
+      "status": "success",
+      "duration": 1235,
+      "screenshot": "tests/results/screenshots/step-3-step-3:-create-event-type.png"
+    },
+    {
+      "step": "Step 4: Test Booking Widget",
+      "status": "success",
+      "duration": 870,
+      "screenshot": "tests/results/screenshots/step-4-step-4:-test-booking-widget.png"
+    },
+    {
+      "step": "Step 5: Check Integrations",
+      "status": "success",
+      "duration": 911,
+      "screenshot": "tests/results/screenshots/step-5-step-5:-check-integrations.png"
+    },
+    {
+      "step": "Step 6: Test Mobile Responsive",
+      "status": "success",
+      "duration": 889,
+      "screenshot": "tests/results/screenshots/step-6-step-6:-test-mobile-responsive.png"
+    }
+  ]
+}
