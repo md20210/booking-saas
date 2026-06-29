@@ -1,0 +1,23 @@
+{
+  "timestamp": "2026-06-29T14:58:57.489Z",
+  "baseUrl": "https://booking-saas-production-c352.up.railway.app",
+  "testUser": {
+    "email": "test-1782745104573@example.com",
+    "name": "Test User E2E"
+  },
+  "summary": {
+    "total": 1,
+    "success": 0,
+    "failed": 1,
+    "duration": 32916
+  },
+  "results": [
+    {
+      "step": "Step 1: Register New User",
+      "status": "failed",
+      "duration": 31827,
+      "screenshot": "tests/results/screenshots/error-1-step-1:-register-new-user.png",
+      "error": "Registration failed - not on dashboard"
+    }
+  ]
+}
