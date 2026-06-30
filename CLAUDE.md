@@ -6,34 +6,50 @@
 
 1. **IMMER zuerst prüfen ob Railway CLI authentifiziert ist:**
    ```bash
-   railway whoami
+   # IN WSL: Verwende Windows CMD Railway CLI!
+   cmd.exe /c "railway whoami"
    ```
 
 2. **Falls "Unauthorized":**
    ```bash
-   railway login
+   # User muss in Windows CMD einloggen (NICHT WSL!)
+   # User führt aus: railway login
    ```
    - User muss sich im Browser einloggen
    - CLI erhält dann Zugriff auf Logs und Deployments
+   - **WICHTIG:** Windows Railway CLI und WSL Railway CLI sind GETRENNT!
 
 3. **NIEMALS ohne Railway CLI Zugriff arbeiten:**
-   - Ohne `railway login` kannst du KEINE Logs sehen
+   - Ohne Railway CLI kannst du KEINE Logs sehen
    - Ohne Logs kannst du KEINE Deployment-Fehler debuggen
    - Ohne Deployment-Fehler zu sehen, ist alles nur Raten
    - **Das führt zu Stunden verschwendeter Zeit mit falschen "Fixes"**
+
+4. **WSL Railway CLI Problem - GELÖST:**
+   ```bash
+   # Verwende IMMER Windows CMD Railway via WSL:
+   cd /mnt/e/CodelocalLLM/booking-saas
+   cmd.exe /c "railway whoami"
+   cmd.exe /c "railway logs"
+   cmd.exe /c "railway status"
+   cmd.exe /c "railway variables"
+   ```
+   - WSL und Windows Railway CLI teilen KEINE Authentifizierung
+   - User loggt sich in Windows CMD ein
+   - WSL ruft Windows Railway CLI über cmd.exe auf
 
 ## Railway Deployment Workflow
 
 ### 1. Vor jedem Deployment-Fix:
 ```bash
-# Check auth
-railway whoami
+# Check auth (via Windows CMD from WSL)
+cmd.exe /c "railway whoami"
 
 # Get latest deployment logs
-railway logs
+cmd.exe /c "railway logs"
 
 # Check environment variables
-railway variables
+cmd.exe /c "railway variables"
 ```
 
 ### 2. Nach Code-Änderungen:
@@ -47,8 +63,8 @@ git add . && git commit -m "fix: ..." && git push
 # Wait for Railway deployment
 sleep 120
 
-# Check deployment logs
-railway logs
+# Check deployment logs (via Windows CMD)
+cmd.exe /c "railway logs"
 
 # Verify endpoint
 curl -I https://booking-saas-production-c352.up.railway.app/api/config
@@ -56,14 +72,14 @@ curl -I https://booking-saas-production-c352.up.railway.app/api/config
 
 ### 3. Deployment Failed?
 ```bash
-# Get build logs from Railway
-railway logs | grep -i error
+# Get build logs from Railway (via Windows CMD)
+cmd.exe /c "railway logs" | grep -i error
 
 # Check if DATABASE_URL is set
-railway variables | grep DATABASE
+cmd.exe /c "railway variables" | grep DATABASE
 
 # Check service status
-railway status
+cmd.exe /c "railway status"
 ```
 
 ## Niemals:
