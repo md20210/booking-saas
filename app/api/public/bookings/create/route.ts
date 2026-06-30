@@ -9,12 +9,12 @@ import { prisma } from '@/lib/db'
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { startTime, endTime, attendeeEmail, attendeeName, eventTitle, eventDescription, userId } = body
+    const { startTime, endTime, attendeeEmail, attendeeName, eventTitle, eventDescription, ownerEmail } = body
 
     // Validate required fields
-    if (!startTime || !endTime || !attendeeEmail || !userId) {
+    if (!startTime || !endTime || !attendeeEmail) {
       return NextResponse.json(
-        { error: 'Missing required fields: startTime, endTime, attendeeEmail, userId' },
+        { error: 'Missing required fields: startTime, endTime, attendeeEmail' },
         { status: 400 }
       )
     }
@@ -27,6 +27,22 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       )
     }
+
+    // Find user by ownerEmail or default to michael.dabrock@gmail.com
+    const calendarOwnerEmail = ownerEmail || 'michael.dabrock@gmail.com'
+    const user = await prisma.user.findUnique({
+      where: { email: calendarOwnerEmail },
+      select: { id: true }
+    })
+
+    if (!user) {
+      return NextResponse.json(
+        { error: 'Calendar owner not found' },
+        { status: 404 }
+      )
+    }
+
+    const userId = user.id
 
     // Check if user has Google Calendar integration
     const integration = await prisma.googleIntegration.findUnique({
