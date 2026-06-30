@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
-import { createCalendarEvent } from '@/lib/google-calendar'
+import { createCalendarEvent } from '@/lib/google/calendar'
 import { prisma } from '@/lib/db'
 
 export async function POST(request: NextRequest) {
@@ -25,32 +25,27 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Get user's Google account
-    const account = await prisma.account.findFirst({
-      where: {
-        userId: session.user.id,
-        provider: 'google',
-      },
+    // Check if user has Google Calendar integration
+    const integration = await prisma.googleIntegration.findUnique({
+      where: { userId: session.user.id },
     })
 
-    if (!account || !account.access_token || !account.refresh_token) {
+    if (!integration || !integration.active) {
       return NextResponse.json(
         { error: 'Google Calendar not connected' },
         { status: 403 }
       )
     }
 
-    // Create calendar event
+    // Create calendar event using existing integration
     const result = await createCalendarEvent(
-      account.access_token,
-      account.refresh_token,
+      session.user.id,
       {
         summary: eventTitle || '30min Beratungsgespräch',
         description: eventDescription || 'Booking via dabrock.ai',
-        start: new Date(startTime),
-        end: new Date(endTime),
+        startTime: new Date(startTime),
+        endTime: new Date(endTime),
         attendees: [attendeeEmail],
-        calendarId: process.env.GOOGLE_CALENDAR_ID || 'primary',
       }
     )
 
@@ -80,7 +75,7 @@ export async function POST(request: NextRequest) {
         startTime: new Date(startTime),
         endTime: new Date(endTime),
         googleEventId: result.eventId!,
-        googleMeetLink: result.meetLink || result.conferenceData?.entryPoints?.[0]?.uri,
+        googleMeetLink: result.meetLink || '',
         status: 'CONFIRMED',
       },
     })
@@ -90,8 +85,8 @@ export async function POST(request: NextRequest) {
       booking: {
         id: booking.id,
         eventId: result.eventId,
-        eventLink: result.eventLink,
-        meetLink: result.meetLink || result.conferenceData?.entryPoints?.[0]?.uri,
+        eventLink: result.htmlLink,
+        meetLink: result.meetLink,
       },
     })
   } catch (error: any) {
