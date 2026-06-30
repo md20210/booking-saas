@@ -24,3 +24,62 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  /* Make all text more readable on mobile */
+  body {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Ensure proper viewport scaling */
+  html {
+    overflow-x: hidden;
+  }
+
+  /* Fix sidebar overlays on mobile */
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  /* Stack grids vertically on mobile */
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Reduce padding on mobile */
+  .container, .card, .panel {
+    padding: 1rem !important;
+  }
+
+  /* Make buttons full width on mobile */
+  button:not(.inline) {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  /* Better spacing for cards */
+  .card + .card {
+    margin-top: 1rem;
+  }
+
+  /* Responsive tables */
+  table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Hide overflow text */
+  .truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
